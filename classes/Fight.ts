@@ -1,6 +1,6 @@
 // Combat.ts
-import { Character } from "../Character.ts";
-import { Aventurier } from "../Aventurier.ts";
+import { Character } from "./Character.ts";
+import { Aventurier } from "./Aventurier.ts";
 import { Monstre } from "./Monstre.ts";
 
 export class Fight {

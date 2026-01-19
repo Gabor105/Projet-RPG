@@ -3,7 +3,9 @@ import { Character } from "../../Character.ts";
 
 export class Ether extends Objet {
     override utiliserObjet(character: Character): void {
-        character.augmanterPM(character.lirePMMaximum()*0.7);
+        //character.augmanterPM(character.lirePMMaximum()*0.7);
+        character.augmanterPM(character.lirePMMaximum()*0.3);
+        
     }
     override connaitreNomObjet(): string {
         return "💊 Éther";

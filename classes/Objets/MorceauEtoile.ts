@@ -7,10 +7,16 @@ export class MorceauEtoile extends Objet {
     override utiliserObjet(character: Character): void {
         this.vieActuel = character.lireVieActuel();
         this.vieMaximum = character.lireVieMaximum();
+        //if (this.vieActuel <= 0){
+           // character.êtreSoingner(this.vieMaximum*0.80);
+        //} else {
+            //character.êtreSoingner(this.vieMaximum*0.5);
+        //}
+
         if (this.vieActuel <= 0){
-            character.êtreSoingner(this.vieMaximum*0.80);
+                character.ressusciter(20);  // Ressuscite avec 20% des PV max
         } else {
-            character.êtreSoingner(this.vieMaximum*0.5);
+                character.êtreSoingner(this.vieMaximum*0.5);  // Soigne 50% si vivant
         }
     }
     override connaitreNomObjet(): string {
