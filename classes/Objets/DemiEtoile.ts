@@ -1,5 +1,5 @@
 import { Objet } from "./Objet.ts";
-import { Character } from "../Character.ts";
+import { Character } from "../../Character.ts";
 
 export class DemiEtoile extends Objet {
     override utiliserObjet(character: Character): void {

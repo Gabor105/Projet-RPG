@@ -1,4 +1,4 @@
-import { Character } from "../Character.ts";
+import { Character } from "../../Character.ts";
 import { Objet } from "./Objet.ts";
 
 export class Potion extends Objet{
