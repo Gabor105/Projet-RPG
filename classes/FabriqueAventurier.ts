@@ -1,5 +1,5 @@
 // FabriqueAventurier.ts
-import { Character } from "./Character.ts";
+import { Character } from "../Character.ts";
 import { Guerrier } from "./Guerrier.ts";
 import { Mage } from "./Mage.ts";
 

@@ -1,6 +1,6 @@
 // Guerrier.ts
-import { Aventurier } from "./Aventurier.ts";
-import { Character } from "./Character.ts";
+import { Aventurier } from "../Aventurier.ts";
+import { Character } from "../Character.ts";
 import { Menu } from "./Menu.ts";
 
 export class Guerrier extends Aventurier {

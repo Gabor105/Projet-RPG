@@ -1,5 +1,5 @@
 // Monstre.ts
-import { Character } from "./Character.ts";
+import { Character } from "../Character.ts";
 
 export class Monstre extends Character {
   constructor(

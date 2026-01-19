@@ -1,5 +1,5 @@
 // GameManager.ts
-import {Character } from "./Character.ts";
+import {Character } from "../Character.ts";
 import { Fight } from "./Fight.ts";
 import { Monstre } from "./Monstre.ts";
 import { Menu } from "./Menu.ts";
