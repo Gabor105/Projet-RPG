@@ -18,6 +18,26 @@ export class Invantaire {
         this.listesDesObjets.push(objet);
     }
 
+    public objetEstDansLeSac(objet:Objet):boolean{
+        const nomObjetRecherche = objet.connaitreNomObjet();
+        for(const obj of this.listesDesObjets){
+            if (obj.connaitreNomObjet() == nomObjetRecherche){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public retirerUnObjet(objet:Objet){
+        const nomObjetRecherche = objet.connaitreNomObjet();
+        for (let i = 0; i < this.listesDesObjets.length; i++) {
+            if (this.listesDesObjets[i].connaitreNomObjet() == nomObjetRecherche){
+                this.listesDesObjets.splice(i, 1);
+                return;
+            }
+        }
+    }
+
     private trierListe(){
         this.dictionnaireQuantitées = {};
         for (const obj of this.listesDesObjets){
