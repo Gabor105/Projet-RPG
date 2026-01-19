@@ -3,6 +3,7 @@ import { Classes } from "../ENUM/Classes.ts";
 export class Character {
     private classes : Classes = Classes.Guerrier;
     private pM:number = 100;
+    private pMMax:number = 100;
     private nom:string = "";
     private force:number = 100;
     private défance:number = 100;
@@ -24,11 +25,29 @@ export class Character {
     public attaque() {
         
     }
-    public êtreSoingner() {
-        
+    public êtreSoingner(quantitée:number) {
+        this.pV += quantitée;
+        if (this.pV>this.pVMax){
+            this.pV = this.pVMax;
+        }
     }
-    public êtreRésucité() {
-        
+    public augmanterPM(quantitée:number) {
+        this.pM += quantitée;
+        if (this.pM>this.pMMax){
+            this.pM = this.pMMax;
+        }
+    }
+    public lireVieMaximum():number{
+        return this.pVMax;
+    }
+    public lireVieActuel():number{
+        return this.pV;
+    }
+    public lirePMMaximum() : number{
+        return this.pMMax;
+    }
+    public lirePMActuel() : number{
+        return this.pM;
     }
     public jouerToursFight() {
         
