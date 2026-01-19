@@ -1,6 +1,6 @@
 // Personnage.ts
 
-export class Personnage {
+export class Character {
   nom: string;
   pvMax: number;
   pvActuels: number;
@@ -78,7 +78,7 @@ export class Personnage {
     );
   }
 
-  attaqueBasique(cible: Personnage): void {
+  attaqueBasique(cible: Character): void {
     if (!this.estVivant()) {
       console.log(`${this.nom} est K.O. et ne peut pas attaquer.`);
       return;

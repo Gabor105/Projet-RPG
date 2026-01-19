@@ -1,17 +1,14 @@
 // Mage.ts
 import { Aventurier } from "./Aventurier.ts";
-import { Character } from "./Character.ts";
+import { Character} from "./Character.ts";
 import { Menu } from "./Menu.ts";
 
 export class Mage extends Aventurier {
-  pmMax: number;
-  pmActuels: number;
   coutSort: number;
 
   constructor(nom: string) {
-    super(nom, 80, 8, 3, 10);
-    this.pmMax = 50;
-    this.pmActuels = 50;
+    // nom, pvMax, attaque, defense, vitesse, pmMax, pmActuels
+    super(nom, 80, 8, 3, 10, 50, 50);
     this.coutSort = 10;
   }
 
@@ -23,11 +20,13 @@ export class Mage extends Aventurier {
 
     this.pmActuels -= this.coutSort;
 
+    // Dégâts magiques : on ignore la défense
     const degats = this.attaque * 2;
     console.log(
       `${this.nom} lance un sort sur ${cible.nom} et inflige ${degats} dégâts magiques !`,
     );
 
+    // On applique directement les dégâts magiques
     cible.pvActuels = Math.max(0, cible.pvActuels - degats);
     console.log(
       `${cible.nom} a maintenant ${cible.pvActuels}/${cible.pvMax} PV.`,
