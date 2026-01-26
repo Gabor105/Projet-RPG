@@ -1,5 +1,5 @@
 import { Objet } from "./Objet.ts";
-import { Character } from "../../Character.ts";
+import { Character } from "../Character.ts";
 import { Invantaire } from "../Invantaire.ts";
 
 export class Ether extends Objet {

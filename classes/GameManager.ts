@@ -6,7 +6,7 @@ import { Menu } from "./Menu.ts";
 import { creerAventurier, TypeAventurier } from "./FabriqueAventurier.ts";
 
 export class GameManager {
-  typesDisponibles: TypeAventurier[] = ["Guerrier", "Mage"];
+  typesDisponibles: TypeAventurier[] = ["Guerrier", "Mage", "Paladin", "Barbare", "Prêtre", "Voleur"];
 
   lancerJeu(): void {
     console.log("=== RPG POO - B1 ===");

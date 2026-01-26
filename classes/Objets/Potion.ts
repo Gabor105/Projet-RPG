@@ -1,5 +1,4 @@
-import { error } from "node:console";
-import { Character } from "../../Character.ts";
+import { Character } from "../Character.ts";
 import { Invantaire } from "../Invantaire.ts";
 import { Objet } from "./Objet.ts";
 

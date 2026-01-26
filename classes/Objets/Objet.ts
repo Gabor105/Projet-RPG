@@ -1,4 +1,4 @@
-import { Character } from "../../Character.ts";
+import { Character } from "../Character.ts";
 import { Invantaire } from "../Invantaire.ts";
 
 export class Objet{
