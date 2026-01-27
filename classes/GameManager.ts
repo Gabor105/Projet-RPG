@@ -12,15 +12,15 @@ export class GameManager {
   equipeA : Aventurier[] = [];
   equipeB : Monstre[] = [];
 
-  public get instance(){
+  public static get instance(){
     if (!GameManager._instance){
-      return GameManager._instance;
+      GameManager._instance = new GameManager();
     }
     return GameManager._instance;
   }
   private constructor() {}
 
-  lancerJeu(): void {
+  public lancerJeu(): void {
     console.log("=== RPG POO - B1 ===");
     console.log("Bienvenue dans le RPG en ligne de commande !");
     console.log("Vous allez choisir un groupe de 3 aventuriers.\n");
