@@ -3,6 +3,7 @@ import { Aventurier } from "./Aventurier.ts";
 import { Character } from "./Character.ts";
 import { Menu } from "./Menu.ts";
 import { Ecrire } from "../Ecrire.ts";
+import { GameManager } from "./GameManager.ts";
 
 export class Paladin extends Aventurier {
   constructor(nom: string) {
@@ -40,37 +41,23 @@ export class Paladin extends Aventurier {
   jouerTour(ennemis: Character[], allies: Character[]): void {
     if (!this.phraseTours()) return;
     
-    switch (this.JoueurFaitUnChoix(["1","2", "3"],"Que veut-tu faire ?\n1 - Attaque physique \n2 - Attaque sainte (tous les ennemis)\n3 - Ne rien faire")) {
+    switch (this.JoueurFaitUnChoix(["1","2", "3"],"Que veut-tu faire ?\n1 - Attaque sainte (tous les ennemis)\n2 - Attaque physique\n3 - Invantaire\n4 - Voir les statistiques des personnages\n5 - Ne rien faire")) {
       case "1" :
-        this.attaquePhysique(ennemis);
-        break;
-      case "2" :
         this.attaqueSainte(ennemis);
         break;
-      case "3":
+      case "2" :
+        this.attaquePhysique(ennemis)
+        break;
+      case "3" :
+        this.regarderInvantaire();
+        break;
+      case "4" :
+        GameManager._instance.afficherLesStatistiques();
+        this.jouerTour(ennemis, allies);
+        break;
+      case "5":
         new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");
         break;
     }
-  }
-
-  attaquePhysique(ennemis: Character[]){
-    const ennemisVivants = ennemis.filter((e) => e.estVivant());
-    if (ennemisVivants.length === 0) {
-      console.log("Il n'y a plus d'ennemi à attaquer !");
-      return;
-    }
-
-    const optionsCibles = ennemisVivants.map((e) => ({
-      label: `${e.nom} (${e.pvActuels}/${e.pvMax} PV)`,
-      valeur: e,
-    }));
-
-    const menuCibles = new Menu<Character>(
-      "Quel ennemi voulez-vous attaquer ?",
-      optionsCibles,
-    );
-
-    const cibleChoisie = menuCibles.poserQuestion();
-    this.attaqueBasique(cibleChoisie);
   }
 }

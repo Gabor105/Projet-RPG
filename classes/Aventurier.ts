@@ -2,6 +2,7 @@
 import { Character } from "./Character.ts";
 import { Ecrire } from "../Ecrire.ts";
 import { Invantaire } from "./Invantaire.ts";
+import { Menu } from "./Menu.ts";
 
 export abstract class Aventurier extends Character {
   constructor(
@@ -77,5 +78,26 @@ export abstract class Aventurier extends Character {
           break;
       }
     }
+  }
+
+  protected attaquePhysique(ennemies : Character[]){
+    const ennemisVivants = ennemies.filter((e) => e.estVivant());
+    if (ennemisVivants.length === 0) {
+      console.log("Il n'y a plus d'ennemi à attaquer !");
+      return;
+    }
+
+    const optionsCibles = ennemisVivants.map((e) => ({
+      label: `${e.nom} (${e.pvActuels}/${e.pvMax} PV)`,
+      valeur: e,
+    }));
+
+    const menuCibles = new Menu<Character>(
+      "Quel ennemi voulez-vous attaquer ?",
+      optionsCibles,
+    );
+
+    const cibleChoisie = menuCibles.poserQuestion();
+    this.attaqueBasique(cibleChoisie);
   }
 }

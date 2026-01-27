@@ -11,6 +11,7 @@ import { DemiEtoile } from "./Objets/DemiEtoile.ts";
 import { Objet } from "./Objets/Objet.ts";
 import { Potion } from "./Objets/Potion.ts";
 import { GameManager } from "./GameManager.ts"
+import { before } from "node:test";
 
 export class Voleur extends Aventurier {
     constructor(nom: string) {
@@ -47,17 +48,21 @@ export class Voleur extends Aventurier {
 
     public override jouerTour(ennemis: Character[], allies: Character[]): void {
         if (!this.phraseTours()) return;
-        switch (this.JoueurFaitUnChoix(["1","2","3","4"],"Que veut-tu faire ?\n1 - voler\n2 - Invantaire\n3 - Voir les statistiques des personnages\n4 - Ne rien faire")) {
+        switch (this.JoueurFaitUnChoix(["1","2","3","4","5"],"Que veut-tu faire ?\n1 - voler\n2 - Attaquer\n3 - Invantaire\n4 - Voir les statistiques des personnages\n5 - Ne rien faire")) {
             case "1" :
                 this.voler();
                 break;
             case "2" :
-                this.regarderInvantaire();
+                this.attaquePhysique(ennemis);
                 break;
             case "3" :
-                GameManager._instance.afficherLesStatistiques();
+                this.regarderInvantaire();
                 break;
-            case "4":
+            case "4" :
+                GameManager._instance.afficherLesStatistiques();
+                this.jouerTour(ennemis, allies);
+                break;
+            case "5":
                 new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");
                 break;
         }
