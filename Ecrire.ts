@@ -38,6 +38,15 @@ export class Ecrire {
         }
         process.stdout.write(phrase + "\x1b[0m");
     }
+
+    public EffacerLigne(nombre:number){
+        const remonter = "\x1b[1A";
+        const effacer = "\x1b[2K";
+        for (let i = 0; i < nombre; i++) {
+            console.log(remonter+effacer+remonter);
+        }
+        console.log(remonter);
+    }
 }
 
 // Exemple d'utilisation :

@@ -2,6 +2,7 @@
 import { format } from "node:path";
 import { Character } from "./Character.ts";
 import { Ecrire } from "../Ecrire.ts";
+import { toASCII } from "node:punycode";
 
 export abstract class Aventurier extends Character {
   constructor(
@@ -23,6 +24,7 @@ export abstract class Aventurier extends Character {
   ): void;
 
   protected phraseTours():boolean{
+    console.log("");
     if (!this.estVivant()) {
       console.log(`${this.nom} est K.O. et ne peut pas jouer.`);
       return false;
@@ -37,10 +39,19 @@ export abstract class Aventurier extends Character {
    * @returns la réponse choisie.
   */
   protected JoueurFaitUnChoix(réponseAutorisées:string[], phrase:string = ""):string{
+    // let retoursALaLigne = 1;
+    // for (let i = 0; i < phrase.length; i++) {
+    //   if (phrase[i] === '\\'){
+    //     console.log(i);
+    //     retoursALaLigne++;
+    //   }
+    // }
+    // console.log(retoursALaLigne);
     if (phrase != "") new Ecrire().EcrireUnePhrase(phrase+"\n");
     let réponse : string | null = null;
     while (réponse == null) {
       réponse = prompt("Votre choix :");
+      new Ecrire().EffacerLigne(4);
       if (réponse != null && réponseAutorisées.includes(réponse)){
         return réponse;
       } else {

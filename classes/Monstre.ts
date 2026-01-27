@@ -19,7 +19,7 @@ export class Monstre extends Character {
     if (ciblesVivantes.length === 0 || !this.estVivant()) {
       return;
     }
-    console.log(`\n--- Tour de ${this.nom} ---`);
+    console.log(`--- Tour de ${this.nom} ---`);
 
     let cible: Aventurier;
     const random = Math.random();

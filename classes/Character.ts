@@ -1,4 +1,5 @@
 // Personnage.ts
+import { Ecrire } from "../Ecrire.ts";
 
 export class Character {
   nom: string;
@@ -46,48 +47,40 @@ export class Character {
   subirDegats(valeurDegats: number): void {
     const degatsEffectifs = Math.max(0, valeurDegats - this.defense);
     this.pvActuels = Math.max(0, this.pvActuels - degatsEffectifs);
-    console.log(
-      `${this.nom} subit ${degatsEffectifs} dégâts. PV restants : ${this.pvActuels}/${this.pvMax}`,
-    );
+    new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* subit *Red*${degatsEffectifs}*Reset* dégâts.\nPV restants : *Red*${this.pvActuels}/${this.pvMax}*Reset*`);
   }
 
   soignerPourcentage(pourcentage: number): void {
     if (!this.estVivant()) {
-      console.log(`${this.nom} est K.O. et ne peut pas être soigné de cette façon.`);
+      new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* est *Red*K.O*Reset*. et ne peut pas être soigné de cette façon.`);
       return;
     }
 
     const soin = Math.floor((this.pvMax * pourcentage) / 100);
     this.pvActuels = Math.min(this.pvMax, this.pvActuels + soin);
-    console.log(
-      `${this.nom} récupère ${soin} PV. PV : ${this.pvActuels}/${this.pvMax}`,
-    );
+    new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* récupère *Red*${soin} PV*Reset*.\nPV : *Red*${this.pvActuels}/${this.pvMax}*Reset*`);
   }
 
   ressusciter(pourcentage: number): void {
     if (this.estVivant()) {
       const soin = Math.floor((this.pvMax * pourcentage) / 100);
       this.pvActuels = Math.min(this.pvMax, this.pvActuels + soin);
-      console.log(
-        `${this.nom} est déjà vivant, il est soigné de ${soin} PV. PV : ${this.pvActuels}/${this.pvMax}`,
-      );
+      new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* est déjà vivant, il est soigné de *Red*${soin} PV*Reset*.\nPV : *Red*${this.pvActuels}/${this.pvMax}*Reset*`);
       return;
     }
 
     const pvRestaure = Math.floor((this.pvMax * pourcentage) / 100);
     this.pvActuels = Math.max(1, pvRestaure);
-    console.log(
-      `${this.nom} est ressuscité avec ${this.pvActuels}/${this.pvMax} PV !`,
-    );
+    new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* est ressuscité avec *Red*${this.pvActuels}/${this.pvMax} PV*Reset* !`);
   }
 
   attaqueBasique(cible: Character): void {
     if (!this.estVivant()) {
-      console.log(`${this.nom} est K.O. et ne peut pas attaquer.`);
+      new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* est *Red*K.O*Reset*. et ne peut pas attaquer.`);
       return;
     }
 
-    console.log(`${this.nom} attaque ${cible.nom} !`);
+    new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* attaque *Blue*${cible.nom}*Reset* !`);
     cible.subirDegats(this.attaque);
   }
 
@@ -103,9 +96,7 @@ export class Character {
       this.pvMax,
       this.pvActuels + Math.floor(quantite),
     );
-    console.log(
-      `${this.nom} est soigné de ${Math.floor(quantite)} PV. PV : ${this.pvActuels}/${this.pvMax}`,
-    );
+    new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* est soigné de *Red*${Math.floor(quantite)} PV*Reset*.\nPV : *Red*${this.pvActuels}/${this.pvMax}*Reset*`);
   }
 
   // Équivalent de "êtreSoingner(quantitée:number)"
@@ -119,9 +110,7 @@ export class Character {
       this.pmMax,
       this.pmActuels + Math.floor(quantite),
     );
-    console.log(
-      `${this.nom} récupère ${Math.floor(quantite)} PM. PM : ${this.pmActuels}/${this.pmMax}`,
-    );
+    new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* récupère *Green*${Math.floor(quantite)} PM*Reset*. PM : *Green*${this.pmActuels}/${this.pmMax}*Reset*`);
   }
 
   // Équivalent demandé par ton collègue : "augmanterPM"
