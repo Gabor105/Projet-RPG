@@ -5,6 +5,7 @@ import { Monstre } from "./Monstre.ts";
 import { Menu } from "./Menu.ts";
 import { creerAventurier, TypeAventurier } from "./FabriqueAventurier.ts";
 import { Aventurier } from "./Aventurier.ts";
+import { Ecrire } from "../Ecrire.ts";
 
 export class GameManager {
   public static _instance : GameManager;
@@ -68,5 +69,31 @@ export class GameManager {
     const monstre3 = new Monstre("Troll", 140, 20, 8, 5);
 
     return [monstre1, monstre2, monstre3];
+  }
+
+  public afficherLesStatistiques(){
+    const e = new Ecrire();
+    e.EcrireUnePhrase(` === AMIS ===\n`);
+    for (let i = 0; i < this.equipeA.length; i++) {
+      e.EcrireUnePhrase(` │ NOM     : ${this.equipeA[i].nom}\n`);
+      e.EcrireUnePhrase(` │ PV max  : ${this.equipeA[i].pvMax}\n`);
+      e.EcrireUnePhrase(` │ PV      : ${this.equipeA[i].pvActuels}\n`);
+      e.EcrireUnePhrase(` │ Attaque : ${this.equipeA[i].attaque}\n`);
+      e.EcrireUnePhrase(` │ Défense : ${this.equipeA[i].defense}\n`);
+      e.EcrireUnePhrase(` │ Vitesse : ${this.equipeA[i].vitesse}\n`);
+      if (this.equipeA[i].pmMax > 0) e.EcrireUnePhrase(` │ PM max  : ${this.equipeA[i].pmMax}\n`);
+      if (this.equipeA[i].pmMax > 0) e.EcrireUnePhrase(` │ PM      : ${this.equipeA[i].pmActuels}\n\n`);
+    }
+    e.EcrireUnePhrase(` === ENNEMIES ===\n`);
+    for (let i = 0; i < this.equipeB.length; i++) {
+      e.EcrireUnePhrase(` │ NOM     : ${this.equipeB[i].nom}\n`);
+      e.EcrireUnePhrase(` │ PV max  : ${this.equipeB[i].pvMax}\n`);
+      e.EcrireUnePhrase(` │ PV      : ${this.equipeB[i].pvActuels}\n`);
+      e.EcrireUnePhrase(` │ Attaque : ${this.equipeB[i].attaque}\n`);
+      e.EcrireUnePhrase(` │ Défense : ${this.equipeB[i].defense}\n`);
+      e.EcrireUnePhrase(` │ Vitesse : ${this.equipeB[i].vitesse}\n`);
+      if (this.equipeA[i].pmMax > 0) e.EcrireUnePhrase(` │ PM max  : ${this.equipeB[i].pmMax}\n`);
+      if (this.equipeA[i].pmMax > 0) e.EcrireUnePhrase(` │ PM      : ${this.equipeB[i].pmActuels}\n\n`);
+    }
   }
 }

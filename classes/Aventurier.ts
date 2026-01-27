@@ -60,15 +60,22 @@ export abstract class Aventurier extends Character {
     return "";
   }
 
-  protected regarderInvantaire(){
-    switch (this.JoueurFaitUnChoix(["1","2","3"],"Que veut-tu faire ?\n1 - voir les objets du sac\n2 - Utiliser un objet\n3 - Ne rien faire")) {
-      case "1" :
-        Invantaire.instance.listeObjetInvantaire();
-        this.regarderInvantaire();
-        break;
-      case "3" :
-        new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");
-        break;
+  protected regarderInvantaire():void{
+    let recomancer = true;
+    while (recomancer){
+      recomancer = false;
+      switch (this.JoueurFaitUnChoix(["1","2","3"],"Que veut-tu faire ?\n1 - voir les objets du sac\n2 - Utiliser un objet\n3 - Ne rien faire")) {
+        case "1" :
+          Invantaire.instance.listeObjetInvantaire();
+          recomancer = true;
+          break;
+        case "2" :
+          Invantaire.instance.choisirUnObjetAConsomer();
+          break;
+        case "3" :
+          new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");
+          break;
+      }
     }
   }
 }

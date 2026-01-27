@@ -10,6 +10,7 @@ import { MorceauEtoile } from "./Objets/MorceauEtoile.ts";
 import { DemiEtoile } from "./Objets/DemiEtoile.ts";
 import { Objet } from "./Objets/Objet.ts";
 import { Potion } from "./Objets/Potion.ts";
+import { GameManager } from "./GameManager.ts"
 
 export class Voleur extends Aventurier {
     constructor(nom: string) {
@@ -46,13 +47,17 @@ export class Voleur extends Aventurier {
 
     public override jouerTour(ennemis: Character[], allies: Character[]): void {
         if (!this.phraseTours()) return;
-        switch (this.JoueurFaitUnChoix(["1","2","3"],"Que veut-tu faire ?\n1 - voler\n2 - Invantaire\n3 - Ne rien faire")) {
+        switch (this.JoueurFaitUnChoix(["1","2","3","4"],"Que veut-tu faire ?\n1 - voler\n2 - Invantaire\n3 - Voir les statistiques des personnages\n4 - Ne rien faire")) {
             case "1" :
                 this.voler();
                 break;
             case "2" :
                 this.regarderInvantaire();
-            case "3":
+                break;
+            case "3" :
+                GameManager._instance.afficherLesStatistiques();
+                break;
+            case "4":
                 new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");
                 break;
         }

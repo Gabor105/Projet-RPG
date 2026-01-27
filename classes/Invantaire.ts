@@ -77,4 +77,22 @@ export class Invantaire {
             console.log("");
         }
     }
+
+    public choisirUnObjetAConsomer(){
+        let phrase = "Quel objets shouaiter vous utilisé ?";
+        let listeNom : string[] = [];
+        let listeNumber : string[] = [];
+        for (let k = 0; k < this.dictionnaireQuantitées.length; k++) {
+            if (this.dictionnaireQuantitées[k] > 0){
+                listeNom.push(this.dictionnaireQuantitées[k].toString());
+                listeNumber.push(k.toString());
+                phrase += `${k+1} - ${this.dictionnaireQuantitées[k].toString()}`
+            }
+        }
+        console.log("/!\\ La fonction sera terminé plus tard /!\\ ");
+        // switch (this.JoueurFaitUnChoix(listeNumber,phrase)) {
+        //     case "1" :
+        //         this.ajouterObjet(listeNom)
+        // }
+    }
 }
