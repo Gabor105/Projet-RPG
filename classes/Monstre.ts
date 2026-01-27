@@ -1,5 +1,6 @@
 // Monstre.ts
 import { Character } from "./Character.ts";
+import { Aventurier } from "./Aventurier.ts";
 
 export class Monstre extends Character {
   constructor(
@@ -12,18 +13,18 @@ export class Monstre extends Character {
     super(nom, pvMax, attaque, defense, vitesse, false);
   }
 
-  jouerTour(cibles: Character[]): void {
+  jouerTour(cibles: Aventurier[]): void {    
     const ciblesVivantes = cibles.filter((c) => c.estVivant());
-    // ciblesVivantes = ciblesVivantes.filter((c) => c.cesUnJoueur);
 
     if (ciblesVivantes.length === 0 || !this.estVivant()) {
       return;
     }
+    console.log(`\n--- Tour de ${this.nom} ---`);
 
-    let cible: Character;
+    let cible: Aventurier;
     const random = Math.random();
 
-    if (random < 0.2) {
+    if (random <= 0.2) {
       // 20% : attaque le personnage avec le moins de PV vivant
       cible = ciblesVivantes.reduce((a, b) => 
         a.lireVieActuel() < b.lireVieActuel() ? a : b
@@ -33,8 +34,6 @@ export class Monstre extends Character {
       const index = Math.floor(Math.random() * ciblesVivantes.length);
       cible = ciblesVivantes[index];
     }
-
-    console.log(`${this.nom} attaque ${cible.nom} !`);
     this.attaqueBasique(cible);
   }
 }

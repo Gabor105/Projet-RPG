@@ -53,7 +53,7 @@ export class Character {
 
   soignerPourcentage(pourcentage: number): void {
     if (!this.estVivant()) {
-      console.log(`${this.nom} est K.O. et ne peut pas être soigné normalement.`);
+      console.log(`${this.nom} est K.O. et ne peut pas être soigné de cette façon.`);
       return;
     }
 

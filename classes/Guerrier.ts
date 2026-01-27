@@ -9,12 +9,7 @@ export class Guerrier extends Aventurier {
   }
 
   jouerTour(ennemis: Character[], allies: Character[]): void {
-    if (!this.estVivant()) {
-      console.log(`${this.nom} est K.O. et ne peut pas jouer.`);
-      return;
-    }
-
-    console.log(`\n--- Tour de ${this.nom} (Guerrier) ---`);
+    if (!this.phraseTours()) return;
     console.log("Ennemis :");
     for (const ennemi of ennemis) {
       console.log(

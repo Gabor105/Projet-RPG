@@ -16,7 +16,7 @@ export class Fight {
   }
 
   private afficherEtatEquipes(): void {
-    this.ecrire.EcrireUnePhrase("\n--- État des équipes ---");
+    this.ecrire.EcrireUnePhrase("\n--- État des équipes ---\n");
     console.log("Équipe A :");
     for (const perso of GameManager._instance.equipeA) {
       this.ecrire.EcrireUnePhrase(` - *Green*${perso.nom}*Reset* : *Red*${perso.pvActuels}/${perso.pvMax} PV*Reset*\n`);

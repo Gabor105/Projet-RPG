@@ -42,27 +42,17 @@ export class Voleur extends Aventurier {
         }
         const classEcriture : Ecrire = new Ecrire();
         classEcriture.EcrireUnePhrase(probabilitéPhrase[vole]);
-
-        // const probabilitéesNombre : number[] = [40,30,15,10,5];
-        // let total : number = 0;
-        // for (let k of probabilitéesNombre) {
-        //     total += k
-        // }
-        // const probabilité = randomInt(total);
-        // const probabilitéPhrase : string[] = ["Le voleur n'as rien voler.", texte+"une potion !", texte+"un fragment d'étoile !", texte+"un éther !", texte+"une demi-étoile !!!"];
-        // const classEcriture : Ecrire = new Ecrire();
-
-        // for (let i = 0; i < probabilitéesNombre.length; i++) {
-        //     if (probabilitéPhrase.length>i){
-        //         if (probabilité < probabilitéesNombre[i]){
-        //             classEcriture.EcrireUnePhrase(probabilitéPhrase[i]);
-        //         }
-        //     }
-        // }
-
     }
 
     public override jouerTour(ennemis: Character[], allies: Character[]): void {
-        this.voler();
+        if (!this.phraseTours()) return;
+        switch (this.JoueurFaitUnChoix(["1","2"],"Que veut-tu faire ?\n1 - voler\n2 - Ne rien faire")) {
+            case "1" :
+                this.voler();
+                break;
+            case "2":
+                new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");
+                break;
+        }
     }
 }

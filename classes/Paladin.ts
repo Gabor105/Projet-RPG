@@ -2,6 +2,7 @@
 import { Aventurier } from "./Aventurier.ts";
 import { Character } from "./Character.ts";
 import { Menu } from "./Menu.ts";
+import { Ecrire } from "../Ecrire.ts";
 
 export class Paladin extends Aventurier {
   constructor(nom: string) {
@@ -37,58 +38,39 @@ export class Paladin extends Aventurier {
   }
 
   jouerTour(ennemis: Character[], allies: Character[]): void {
-    if (!this.estVivant()) {
-      console.log(`${this.nom} est K.O. et ne peut pas jouer.`);
-      return;
+    if (!this.phraseTours()) return;
+    
+    switch (this.JoueurFaitUnChoix(["1","2", "3"],"Que veut-tu faire ?\n1 - Attaque physique \n2 - Attaque sainte (tous les ennemis)\n3 - Ne rien faire")) {
+      case "1" :
+        this.attaquePhysique(ennemis);
+        break;
+      case "2" :
+        this.attaqueSainte(ennemis);
+        break;
+      case "3":
+        new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");
+        break;
     }
+  }
 
-    console.log(`\n--- Tour de ${this.nom} (Paladin) ---`);
-    console.log(`${this.nom} : ${this.pvActuels}/${this.pvMax} PV`);
-
-    console.log("Ennemis :");
-    for (const ennemi of ennemis) {
-      console.log(
-        ` - ${ennemi.nom} : ${ennemi.pvActuels}/${ennemi.pvMax} PV`,
-      );
-    }
-
-    const optionsActions = [
-      { label: "Attaque physique", valeur: "ATTAQUE_PHYSIQUE" },
-      { label: "Attaque sainte (tous les ennemis)", valeur: "ATTAQUE_SAINTE" },
-      { label: "Ne rien faire", valeur: "RIEN" },
-    ];
-
-    const menuActions = new Menu<string>(
-      `Que doit faire ${this.nom} ?`,
-      optionsActions,
-    );
-
-    const actionChoisie = menuActions.poserQuestion();
-    console.log(`Action choisie : ${actionChoisie}`);
-
+  attaquePhysique(ennemis: Character[]){
     const ennemisVivants = ennemis.filter((e) => e.estVivant());
-    if (ennemisVivants.length === 0 && actionChoisie === "ATTAQUE_PHYSIQUE") {
+    if (ennemisVivants.length === 0) {
       console.log("Il n'y a plus d'ennemi à attaquer !");
       return;
     }
 
-    if (actionChoisie === "ATTAQUE_PHYSIQUE") {
-      const optionsCibles = ennemisVivants.map((e) => ({
-        label: `${e.nom} (${e.pvActuels}/${e.pvMax} PV)`,
-        valeur: e,
-      }));
+    const optionsCibles = ennemisVivants.map((e) => ({
+      label: `${e.nom} (${e.pvActuels}/${e.pvMax} PV)`,
+      valeur: e,
+    }));
 
-      const menuCibles = new Menu<Character>(
-        "Quel ennemi voulez-vous attaquer ?",
-        optionsCibles,
-      );
+    const menuCibles = new Menu<Character>(
+      "Quel ennemi voulez-vous attaquer ?",
+      optionsCibles,
+    );
 
-      const cibleChoisie = menuCibles.poserQuestion();
-      this.attaqueBasique(cibleChoisie);
-    } else if (actionChoisie === "ATTAQUE_SAINTE") {
-      this.attaqueSainte(ennemis);
-    } else {
-      console.log(`${this.nom} ne fait rien ce tour-ci.`);
-    }
+    const cibleChoisie = menuCibles.poserQuestion();
+    this.attaqueBasique(cibleChoisie);
   }
 }

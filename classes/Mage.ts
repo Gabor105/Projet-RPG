@@ -34,12 +34,7 @@ export class Mage extends Aventurier {
   }
 
   jouerTour(ennemis: Character[], allies: Character[]): void {
-    if (!this.estVivant()) {
-      console.log(`${this.nom} est K.O. et ne peut pas jouer.`);
-      return;
-    }
-
-    console.log(`\n--- Tour de ${this.nom} (Mage) ---`);
+    if (!this.phraseTours()) return;
     console.log(
       `${this.nom} : ${this.pvActuels}/${this.pvMax} PV, ${this.pmActuels}/${this.pmMax} PM`,
     );
