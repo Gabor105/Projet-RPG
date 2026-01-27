@@ -4,10 +4,18 @@ import { Objet } from "./Objets/Objet.ts";
 import { Potion } from "./Objets/Potion.ts";
 
 export class Invantaire {
+    public static _instance : Invantaire;
     private listesDesObjets : Objet[] = [];
     private dictionnaireQuantitées: { [nom: string]: number } = {};
 
-    constructor(){
+    public get instance(){
+        if (!Invantaire._instance){
+            return Invantaire._instance;
+        }
+        return Invantaire._instance;
+    }
+
+    private constructor(){
         this.listesDesObjets.push(new Potion());
         this.listesDesObjets.push(new Potion());
         this.listesDesObjets.push(new Ether());
