@@ -12,7 +12,7 @@ export abstract class Aventurier extends Character {
     pmActuels: number = 0,
   ) {
     // On envoie tous les paramètres au constructeur de Character
-    super(nom, pvMax, attaque, defense, vitesse, pmMax, pmActuels);
+    super(nom, pvMax, attaque, defense, vitesse, true, pmMax, pmActuels);
   }
 
   abstract jouerTour(

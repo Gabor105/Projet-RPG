@@ -2,8 +2,10 @@
 import { Character } from "./Character.ts";
 import { Aventurier } from "./Aventurier.ts";
 import { Monstre } from "./Monstre.ts";
+import { Ecrire } from "../Ecrire.ts";
 
 export class Fight {
+  ecrire : Ecrire = new Ecrire();
   equipeA: Character[];
   equipeB: Character[];
   ordreTours: Character[];
@@ -18,18 +20,14 @@ export class Fight {
   }
 
   private afficherEtatEquipes(): void {
-    console.log("\n--- État des équipes ---");
+    this.ecrire.EcrireUnePhrase("\n--- État des équipes ---");
     console.log("Équipe A :");
     for (const perso of this.equipeA) {
-      console.log(
-        ` - ${perso.nom} : ${perso.pvActuels}/${perso.pvMax} PV`,
-      );
+      this.ecrire.EcrireUnePhrase(` - *Green*${perso.nom}*Reset* : *Red*${perso.pvActuels}/${perso.pvMax} PV*Reset*\n`);
     }
     console.log("Équipe B :");
     for (const perso of this.equipeB) {
-      console.log(
-        ` - ${perso.nom} : ${perso.pvActuels}/${perso.pvMax} PV`,
-      );
+      this.ecrire.EcrireUnePhrase(` - *Green*${perso.nom}*Reset* : *Red*${perso.pvActuels}/${perso.pvMax} PV*Reset*\n`);
     }
     console.log("------------------------\n");
   }
@@ -39,7 +37,7 @@ export class Fight {
   }
 
   lancer(): void {
-    console.log(">>> Début du combat !");
+    this.ecrire.EcrireUnePhrase(">>> Début du combat !");
     this.afficherEtatEquipes();
 
     while (true) {

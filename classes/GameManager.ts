@@ -13,16 +13,16 @@ export class GameManager {
     console.log("Bienvenue dans le RPG en ligne de commande !");
     console.log("Vous allez choisir un groupe de 3 aventuriers.\n");
 
-    const equipeA = this.choisirGroupeAventuriers();
+    const equipeA : Character[] = this.choisirGroupeAventuriers();
 
     console.log("\nVotre groupe d'aventuriers :");
     for (const perso of equipeA) {
       console.log(` - ${perso.nom}`);
     }
 
-    const equipeB = this.creerMonstresPourPremierCombat();
+    const equipeB : Character[] = this.creerMonstresPourPremierCombat();
 
-    const fight = new Fight(equipeA, equipeB);
+    const fight : Fight = new Fight(equipeA, equipeB);
     fight.lancer();
 
     console.log("\nFin de la partie (version simple - un seul combat).");

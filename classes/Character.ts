@@ -11,6 +11,7 @@ export class Character {
   // Nouveau : gestion des Points de Magie (PM)
   pmMax: number;
   pmActuels: number;
+  public cesUnJoueur : boolean;
 
   constructor(
     nom: string,
@@ -18,6 +19,7 @@ export class Character {
     attaque: number,
     defense: number,
     vitesse: number,
+    cesUnJoueur : boolean,
     pmMax: number = 0,
     pmActuels: number = 0,
   ) {
@@ -27,6 +29,7 @@ export class Character {
     this.attaque = attaque;
     this.defense = defense;
     this.vitesse = vitesse;
+    this.cesUnJoueur = cesUnJoueur;
 
     this.pmMax = pmMax;
     this.pmActuels = pmActuels;

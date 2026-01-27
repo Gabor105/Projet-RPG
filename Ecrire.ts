@@ -40,5 +40,6 @@ export class Ecrire {
     }
 }
 
-let écriture = new Ecrire();
-écriture.EcrireUnePhrase(`*GrayBg*Bonjour, *Reset**Red*voici*Reset* un texte\n`);
+// Exemple d'utilisation :
+// let écriture = new Ecrire();
+// écriture.EcrireUnePhrase(`*GrayBg*Bonjour, *Reset**Red*voici*Reset* un texte\n`);
