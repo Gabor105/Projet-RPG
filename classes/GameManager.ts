@@ -4,32 +4,44 @@ import { Fight } from "./Fight.ts";
 import { Monstre } from "./Monstre.ts";
 import { Menu } from "./Menu.ts";
 import { creerAventurier, TypeAventurier } from "./FabriqueAventurier.ts";
+import { Aventurier } from "./Aventurier.ts";
 
 export class GameManager {
+  public static _instance : GameManager;
   typesDisponibles: TypeAventurier[] = ["Guerrier", "Mage", "Paladin", "Barbare", "Prêtre", "Voleur"];
+  equipeA : Aventurier[] = [];
+  equipeB : Monstre[] = [];
+
+  public get instance(){
+    if (!GameManager._instance){
+      return GameManager._instance;
+    }
+    return GameManager._instance;
+  }
+  private constructor() {}
 
   lancerJeu(): void {
     console.log("=== RPG POO - B1 ===");
     console.log("Bienvenue dans le RPG en ligne de commande !");
     console.log("Vous allez choisir un groupe de 3 aventuriers.\n");
 
-    const equipeA : Character[] = this.choisirGroupeAventuriers();
+    this.equipeA = this.choisirGroupeAventuriers();
 
     console.log("\nVotre groupe d'aventuriers :");
-    for (const perso of equipeA) {
+    for (const perso of this.equipeA) {
       console.log(` - ${perso.nom}`);
     }
 
-    const equipeB : Character[] = this.creerMonstresPourPremierCombat();
+    this.equipeB = this.creerMonstresPourPremierCombat();
 
-    const fight : Fight = new Fight(equipeA, equipeB);
+    const fight : Fight = new Fight();
     fight.lancer();
 
     console.log("\nFin de la partie (version simple - un seul combat).");
   }
 
-  private choisirGroupeAventuriers(): Character[] {
-    const equipe: Character[] = [];
+  private choisirGroupeAventuriers(): Aventurier[] {
+    const equipe: Aventurier[] = [];
 
     for (let i = 1; i <= 3; i++) {
       const options = this.typesDisponibles.map((t) => ({
@@ -50,7 +62,7 @@ export class GameManager {
     return equipe;
   }
 
-  private creerMonstresPourPremierCombat(): Character[] {
+  private creerMonstresPourPremierCombat(): Monstre[] {
     const monstre1 = new Monstre("Orc", 100, 16, 5, 7);
     const monstre2 = new Monstre("Gobelin", 70, 12, 2, 13);
     const monstre3 = new Monstre("Troll", 140, 20, 8, 5);

@@ -6,11 +6,12 @@ import { Paladin } from "./Paladin.ts";
 import { Barbare } from "./Barbare.ts"
 import { Pretre } from "./Pretre.ts"
 import { Voleur } from "./Voleur.ts";
+import { Aventurier } from "./Aventurier.ts";
 
 
 export type TypeAventurier = "Guerrier" | "Mage" | "Paladin" | "Barbare" | "Prêtre" | "Voleur";
 
-export function creerAventurier(type: TypeAventurier, numero: number): Character {
+export function creerAventurier(type: TypeAventurier, numero: number): Aventurier {
   const nom = `${type} ${numero}`;
 
   switch (type) {
