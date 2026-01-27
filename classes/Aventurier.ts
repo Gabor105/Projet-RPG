@@ -1,8 +1,7 @@
 // Aventurier.ts
-import { format } from "node:path";
 import { Character } from "./Character.ts";
 import { Ecrire } from "../Ecrire.ts";
-import { toASCII } from "node:punycode";
+import { Invantaire } from "./Invantaire.ts";
 
 export abstract class Aventurier extends Character {
   constructor(
@@ -59,5 +58,17 @@ export abstract class Aventurier extends Character {
       }
     }
     return "";
+  }
+
+  protected regarderInvantaire(){
+    switch (this.JoueurFaitUnChoix(["1","2","3"],"Que veut-tu faire ?\n1 - voir les objets du sac\n2 - Utiliser un objet\n3 - Ne rien faire")) {
+      case "1" :
+        Invantaire.instance.listeObjetInvantaire();
+        this.regarderInvantaire();
+        break;
+      case "3" :
+        new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");
+        break;
+    }
   }
 }

@@ -5,22 +5,17 @@ import { Potion } from "./Objets/Potion.ts";
 
 export class Invantaire {
     public static _instance : Invantaire;
-    private listesDesObjets : Objet[] = [];
+    private listesDesObjets : Objet[] = [new Potion(), new Potion(), new Ether(), new MorceauEtoile()];
     private dictionnaireQuantitées: { [nom: string]: number } = {};
 
-    public get instance(){
+    public static get instance(){
         if (!Invantaire._instance){
-            return Invantaire._instance;
+            Invantaire._instance = new Invantaire();
         }
         return Invantaire._instance;
     }
 
-    private constructor(){
-        this.listesDesObjets.push(new Potion());
-        this.listesDesObjets.push(new Potion());
-        this.listesDesObjets.push(new Ether());
-        this.listesDesObjets.push(new MorceauEtoile());
-    }
+    private constructor(){}
 
     public ajouterObjet(objet:Objet){
         this.listesDesObjets.push(objet);
@@ -69,8 +64,9 @@ export class Invantaire {
         }
     }
     public listeObjetInvantaire(){
+        // console.log(this.listesDesObjets.length);
         this.trierListe();
-        if (this.trierListe.length == 0){
+        if (this.dictionnaireQuantitées.length === 0){
             console.log("\nVotre sac est vide...");
         } else {
             console.log("\nVotre invantaire contient :");
@@ -78,6 +74,7 @@ export class Invantaire {
             this.ecrireLigneListeObjetInvantaire("✨ Morceau d'étoile");
             this.ecrireLigneListeObjetInvantaire("🌟 Demi-étoile");
             this.ecrireLigneListeObjetInvantaire("💊 Éther");
+            console.log("");
         }
     }
 }

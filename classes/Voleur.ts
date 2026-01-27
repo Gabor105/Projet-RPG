@@ -46,11 +46,13 @@ export class Voleur extends Aventurier {
 
     public override jouerTour(ennemis: Character[], allies: Character[]): void {
         if (!this.phraseTours()) return;
-        switch (this.JoueurFaitUnChoix(["1","2"],"Que veut-tu faire ?\n1 - voler\n2 - Ne rien faire")) {
+        switch (this.JoueurFaitUnChoix(["1","2","3"],"Que veut-tu faire ?\n1 - voler\n2 - Invantaire\n3 - Ne rien faire")) {
             case "1" :
                 this.voler();
                 break;
-            case "2":
+            case "2" :
+                this.regarderInvantaire();
+            case "3":
                 new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");
                 break;
         }
