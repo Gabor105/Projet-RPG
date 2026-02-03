@@ -1,14 +1,14 @@
 // Guerrier.ts
-import { Aventurier } from "./Aventurier.ts";
-import { Character } from "./Character.ts";
-import { Menu } from "./Menu.ts";
+import { Aventurier } from "../Aventurier.ts";
+import { Character } from "../Character.ts";
+import { Menu } from "../Menu.ts";
 
 export class Guerrier extends Aventurier {
   constructor(nom: string) {
     super(nom, 120, 18, 8, 8);
   }
 
-  jouerTour(ennemis: Character[], allies: Character[]): void {
+  public override async jouerTour(ennemis: Character[], allies: Character[]): Promise<void> {
     if (!this.phraseTours()) return;
     console.log("Ennemis :");
     for (const ennemi of ennemis) {

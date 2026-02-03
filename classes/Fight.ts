@@ -32,7 +32,7 @@ export class Fight {
     return equipe.every((perso) => !perso.estVivant());
   }
 
-  lancer(): void {
+  async lancer() {
     this.ecrire.EcrireUnePhrase(">>> Début du combat !");
     this.afficherEtatEquipes();
 
@@ -49,10 +49,10 @@ export class Fight {
         // const ennemis = estDansEquipeA ? this.equipeB : this.equipeA;
 
         if (perso instanceof Aventurier) {
-          (perso as Aventurier).jouerTour(GameManager._instance.equipeB, GameManager._instance.equipeA);
+          await perso.jouerTour(GameManager._instance.equipeB, GameManager._instance.equipeA);
         } else if (perso instanceof Monstre) {
           console.log("");
-          (perso as Monstre).jouerTour(GameManager._instance.equipeA);
+          await perso.jouerTour(GameManager._instance.equipeA);
           prompt("");
         } else {
           const ciblesVivantes = GameManager._instance.equipeB.filter((e) => e.estVivant());

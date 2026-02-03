@@ -21,7 +21,7 @@ export class GameManager {
   }
   private constructor() {}
 
-  public lancerJeu(): void {
+  public async lancerJeu() {
     console.log("=== RPG POO - B1 ===");
     console.log("Bienvenue dans le RPG en ligne de commande !");
     console.log("Vous allez choisir un groupe de 3 aventuriers.\n");
@@ -36,7 +36,7 @@ export class GameManager {
     this.equipeB = this.creerMonstresPourPremierCombat();
 
     const fight : Fight = new Fight();
-    fight.lancer();
+    await fight.lancer();
 
     console.log("\nFin de la partie (version simple - un seul combat).");
   }

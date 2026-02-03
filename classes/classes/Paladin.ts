@@ -1,9 +1,10 @@
 // Paladin.ts
-import { Aventurier } from "./Aventurier.ts";
-import { Character } from "./Character.ts";
-import { Menu } from "./Menu.ts";
-import { Ecrire } from "../Ecrire.ts";
-import { GameManager } from "./GameManager.ts";
+import { Aventurier } from "../Aventurier.ts";
+import { Character } from "../Character.ts";
+import { Menu } from "../Menu.ts";
+import { Ecrire } from "../../Ecrire.ts";
+import { GameManager } from "../GameManager.ts";
+import { Choix } from "../Choix.ts";
 
 export class Paladin extends Aventurier {
   constructor(nom: string) {
@@ -38,24 +39,27 @@ export class Paladin extends Aventurier {
     }
   }
 
-  jouerTour(ennemis: Character[], allies: Character[]): void {
+  public override async jouerTour(ennemis: Character[], allies: Character[]): Promise<void> {
     if (!this.phraseTours()) return;
+    const choix = new Choix();
+    console.log("Que veut-tu faire ?");
+    const valeur = await choix.FaireUnChoix(["1 - Attaque sainte (tous les ennemis)","2 - Attaquer physique","3 - Invantaire","4 - Voir les statistiques des personnages","5 - Ne rien faire"]);
     
-    switch (this.JoueurFaitUnChoix(["1","2", "3"],"Que veut-tu faire ?\n1 - Attaque sainte (tous les ennemis)\n2 - Attaque physique\n3 - Invantaire\n4 - Voir les statistiques des personnages\n5 - Ne rien faire")) {
-      case "1" :
+    switch (valeur) {
+      case 1 :
         this.attaqueSainte(ennemis);
         break;
-      case "2" :
+      case 2 :
         this.attaquePhysique(ennemis)
         break;
-      case "3" :
-        this.regarderInvantaire();
+      case 3 :
+        await this.regarderInvantaire();
         break;
-      case "4" :
+      case 4 :
         GameManager._instance.afficherLesStatistiques();
         this.jouerTour(ennemis, allies);
         break;
-      case "5":
+      case 5 :
         new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");
         break;
     }

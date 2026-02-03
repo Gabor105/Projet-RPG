@@ -1,17 +1,18 @@
 // import { randomInt } from "node:crypto";
-import { Aventurier } from "./Aventurier.ts";
+import { Aventurier } from "../Aventurier.ts";
 // import { Menu } from "./Menu.ts";
-import { Ecrire } from "../Ecrire.ts";
-import { Character } from "./Character.ts";
-import { CalculeProbabilitées } from "./CalculeProbabilitées.ts";
-import { Invantaire } from "./Invantaire.ts";
-import { Ether } from "./Objets/Ether.ts";
-import { MorceauEtoile } from "./Objets/MorceauEtoile.ts";
-import { DemiEtoile } from "./Objets/DemiEtoile.ts";
-import { Objet } from "./Objets/Objet.ts";
-import { Potion } from "./Objets/Potion.ts";
-import { GameManager } from "./GameManager.ts"
+import { Ecrire } from "../../Ecrire.ts";
+import { Character } from "../Character.ts";
+import { CalculeProbabilitées } from "../CalculeProbabilitées.ts";
+import { Invantaire } from "../Invantaire.ts";
+import { Ether } from "../Objets/Ether.ts";
+import { MorceauEtoile } from "../Objets/MorceauEtoile.ts";
+import { DemiEtoile } from "../Objets/DemiEtoile.ts";
+import { Objet } from "../Objets/Objet.ts";
+import { Potion } from "../Objets/Potion.ts";
+import { GameManager } from "../GameManager.ts"
 import { before } from "node:test";
+import { Choix } from "../Choix.ts";
 
 export class Voleur extends Aventurier {
     constructor(nom: string) {
@@ -46,23 +47,27 @@ export class Voleur extends Aventurier {
         classEcriture.EcrireUnePhrase(probabilitéPhrase[vole]);
     }
 
-    public override jouerTour(ennemis: Character[], allies: Character[]): void {
+    public override async jouerTour(ennemis: Character[], allies: Character[]) : Promise<void>{
         if (!this.phraseTours()) return;
-        switch (this.JoueurFaitUnChoix(["1","2","3","4","5"],"Que veut-tu faire ?\n1 - voler\n2 - Attaquer\n3 - Invantaire\n4 - Voir les statistiques des personnages\n5 - Ne rien faire")) {
-            case "1" :
+        const choix = new Choix();
+        console.log("Que veut-tu faire ?");
+        const valeur = await choix.FaireUnChoix(["1 - voler","2 - Attaquer","3 - Invantaire","4 - Voir les statistiques des personnages","5 - Ne rien faire"]);
+
+        switch (valeur) {
+            case 1 :
                 this.voler();
                 break;
-            case "2" :
+            case 2 :
                 this.attaquePhysique(ennemis);
                 break;
-            case "3" :
-                this.regarderInvantaire();
+            case 3 :
+                await this.regarderInvantaire();
                 break;
-            case "4" :
+            case 4 :
                 GameManager._instance.afficherLesStatistiques();
-                this.jouerTour(ennemis, allies);
+                await this.jouerTour(ennemis, allies);
                 break;
-            case "5":
+            case 5:
                 new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");
                 break;
         }

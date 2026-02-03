@@ -1,7 +1,7 @@
 // Mage.ts
-import { Aventurier } from "./Aventurier.ts";
-import { Character} from "./Character.ts";
-import { Menu } from "./Menu.ts";
+import { Aventurier } from "../Aventurier.ts";
+import { Character} from "../Character.ts";
+import { Menu } from "../Menu.ts";
 
 export class Mage extends Aventurier {
   coutSort: number;
@@ -33,19 +33,9 @@ export class Mage extends Aventurier {
     );
   }
 
-  jouerTour(ennemis: Character[], allies: Character[]): void {
+  public override async jouerTour(ennemis: Character[], allies: Character[]): Promise<void> {
     if (!this.phraseTours()) return;
-    console.log(
-      `${this.nom} : ${this.pvActuels}/${this.pvMax} PV, ${this.pmActuels}/${this.pmMax} PM`,
-    );
-
-    console.log("Ennemis :");
-    for (const ennemi of ennemis) {
-      console.log(
-        ` - ${ennemi.nom} : ${ennemi.pvActuels}/${ennemi.pvMax} PV`,
-      );
-    }
-
+  
     const optionsActions = [
       { label: "Attaque physique", valeur: "ATTAQUE_PHYSIQUE" },
       { label: "Attaque magique (coût 10 PM)", valeur: "ATTAQUE_MAGIQUE" },

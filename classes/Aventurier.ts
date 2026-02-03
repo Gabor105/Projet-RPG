@@ -3,6 +3,7 @@ import { Character } from "./Character.ts";
 import { Ecrire } from "../Ecrire.ts";
 import { Invantaire } from "./Invantaire.ts";
 import { Menu } from "./Menu.ts";
+import { Choix } from "./Choix.ts";
 
 export abstract class Aventurier extends Character {
   constructor(
@@ -21,7 +22,7 @@ export abstract class Aventurier extends Character {
   abstract jouerTour(
     ennemis: Character[],
     allies: Character[],
-  ): void;
+  ) : Promise<void> ;
 
   protected phraseTours():boolean{
     console.log("");
@@ -61,19 +62,23 @@ export abstract class Aventurier extends Character {
     return "";
   }
 
-  protected regarderInvantaire():void{
+  protected async regarderInvantaire(){
     let recomancer = true;
     while (recomancer){
       recomancer = false;
-      switch (this.JoueurFaitUnChoix(["1","2","3"],"Que veut-tu faire ?\n1 - voir les objets du sac\n2 - Utiliser un objet\n3 - Ne rien faire")) {
-        case "1" :
+      const choix = new Choix();
+      console.log("Que veut-tu faire ?");
+      const valeur = await choix.FaireUnChoix(["1 - voir les objets du sac","2 - Utiliser un objet","3 - Ne rien faire"]);
+
+      switch (valeur) {
+        case 1 :
           Invantaire.instance.listeObjetInvantaire();
           recomancer = true;
           break;
-        case "2" :
+        case 2 :
           Invantaire.instance.choisirUnObjetAConsomer();
           break;
-        case "3" :
+        case 3 :
           new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");
           break;
       }

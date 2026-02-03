@@ -1,7 +1,7 @@
 // Barbare.ts
-import { Aventurier } from "./Aventurier.ts";
-import { Character } from "./Character.ts";
-import { Menu } from "./Menu.ts";
+import { Aventurier } from "../Aventurier.ts";
+import { Character } from "../Character.ts";
+import { Menu } from "../Menu.ts";
 
 export class Barbare extends Aventurier {
   constructor(nom: string) {
@@ -47,7 +47,7 @@ export class Barbare extends Aventurier {
     );
   }
 
-  jouerTour(ennemis: Character[], allies: Character[]): void {
+  public override async jouerTour(ennemis: Character[], allies: Character[]): Promise<void> {
     if (!this.phraseTours()) return;
     
     console.log(`${this.nom} : ${this.pvActuels}/${this.pvMax} PV`);

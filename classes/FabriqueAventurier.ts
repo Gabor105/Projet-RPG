@@ -1,11 +1,11 @@
 // FabriqueAventurier.ts
 import { Character } from "./Character.ts";
-import { Guerrier } from "./Guerrier.ts";
-import { Mage } from "./Mage.ts";
-import { Paladin } from "./Paladin.ts";
-import { Barbare } from "./Barbare.ts"
-import { Pretre } from "./Pretre.ts"
-import { Voleur } from "./Voleur.ts";
+import { Guerrier } from "./classes/Guerrier.ts";
+import { Mage } from "./classes/Mage.ts";
+import { Paladin } from "./classes/Paladin.ts";
+import { Barbare } from "./classes/Barbare.ts"
+import { Pretre } from "./classes/Pretre.ts"
+import { Voleur } from "./classes/Voleur.ts";
 import { Aventurier } from "./Aventurier.ts";
 
 
