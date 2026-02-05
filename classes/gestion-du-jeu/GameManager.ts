@@ -38,8 +38,6 @@ export class GameManager {
     }
     this.equipeB = this.creerMonstresPourPremierCombat();
 
-    // const coffre0 : SalleCoffre = new SalleCoffre();
-    // await coffre0.ouvrirCoffre();
     // déroulement de la partie :
     //1.	Une salle avec un combat aléatoire ( 3 monstres) 🦹‍♀️🧟🧜‍♂️
     const fight1 : Fight = new Fight();

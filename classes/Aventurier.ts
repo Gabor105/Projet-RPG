@@ -75,7 +75,7 @@ export abstract class Aventurier extends Character {
           recomancer = true;
           break;
         case 2 :
-          Invantaire.instance.choisirUnObjetAConsomer();
+          await Invantaire.instance.choisirUnObjetAConsomer();
           break;
         case 3 :
           new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");

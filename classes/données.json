@@ -94,5 +94,13 @@
         "defense": 12,
         "vitesse": 15,
         "pmMax": 0
+    },
+    "Boss": {
+        "nom": "Boss",
+        "pvMax": 200,
+        "attaque": 40,
+        "defense": 30,
+        "vitesse": 60,
+        "pmMax": 0
     }
 }

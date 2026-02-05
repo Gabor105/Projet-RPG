@@ -12,15 +12,15 @@ export class SalleCoffre{
     private objets : Objet[] = [];
     private probabilitéDePiège : number = 20; // ces un pourcentage
     private ecrire = new Ecrire();
-    private dégàEnCasDePiège:number=10;
+    private dégàEnCasDePiège:number=20;
 
     public async ouvrirCoffre(){
         this.ecrire.EcrireUnePhrase("Vous avez trouver un *Blue*coffre*Reset* !\n");
         this.ecrire.EcrireUnePhrase("Mais c'est peut-être un piège... Quel personnages vas prendre le risque de l'ouvrir ?\n");
         const listeNom : string[] = [];
-        for (let i = 0; i < GameManager._instance.equipeA.length; i++) {
-            if (GameManager._instance.equipeA[i].pvActuels > 0){
-                listeNom.push(`${i+1} - ${GameManager._instance.equipeA[i].nom}`);
+        for (let i = 0; i < GameManager.instance.equipeA.length; i++) {
+            if (GameManager.instance.equipeA[i].pvActuels > 0){
+                listeNom.push(`${i+1} - ${GameManager.instance.equipeA[i].nom}`);
             }
         }
         if (listeNom.length == 0){
@@ -29,12 +29,12 @@ export class SalleCoffre{
         }
         const choix = new Choix();
         const valeur = await choix.FaireUnChoix(listeNom)-1;
-        this.ecrire.EcrireUnePhrase(`*Green*${GameManager._instance.equipeA[valeur]}*Reset* ouvre le coffre !\n`);
+        this.ecrire.EcrireUnePhrase(`*Green*${GameManager.instance.equipeA[valeur].nom}*Reset* ouvre le coffre !\n`);
             
         const random = Math.floor(Math.random() * 101);
         if (random<=this.probabilitéDePiège){
             this.ecrire.EcrireUnePhrase(`C'était un piège !\n`);
-            GameManager._instance.equipeA[valeur].subirDegats(this.dégàEnCasDePiège);
+            GameManager.instance.equipeA[valeur].subirDegats(this.dégàEnCasDePiège);
         } else {
             this.ecrire.EcrireUnePhrase(`Ce n'était pas un piège !\n`);
             if (random <= 5){
@@ -53,18 +53,22 @@ export class SalleCoffre{
             if (this.objets.length == 0){
                 this.ecrire.EcrireUnePhrase("Oh non ! Il était vide...\n");// cela ne doit jamais être afficher.
             } else {
-                this.ecrire.EcrireUnePhrase("Vous avez obtenu :\n");
+                this.ecrire.EcrireUnePhrase("\nVous avez obtenu :\n");
                 for (let i = 0; i < this.objets.length; i++) {
-                    this.ecrire.EcrireUnePhrase(`| *Green*${this.objets[i].connaitreNomObjet()}*Reset*`);
+                    this.ecrire.EcrireUnePhrase(`| *Green*${this.objets[i].connaitreNomObjet()}*Reset*\n`);
                 }            
             }
         }
+        await sleep(2000);
+        console.log("\n");
     }
 
     private cadeauDuCoffre(objet:Objet){
         if (this.objets.length < 2){
             this.objets.push(objet);
-            Invantaire._instance.ajouterObjet(objet);
+            Invantaire.instance.ajouterObjet(objet);
         }
     }
 }
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

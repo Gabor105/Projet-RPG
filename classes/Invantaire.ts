@@ -1,12 +1,19 @@
+import {Ecrire} from "../Ecrire.ts";
+import {Aventurier} from "./Aventurier.ts";
+import {GameManager} from "./gestion-du-jeu/GameManager.ts";
+import {DemiEtoile} from "./Objets/DemiEtoile.ts";
 import { Ether } from "./Objets/Ether.ts";
 import { MorceauEtoile } from "./Objets/MorceauEtoile.ts";
 import { Objet } from "./Objets/Objet.ts";
 import { Potion } from "./Objets/Potion.ts";
+import {Choix} from "./utils/Choix.ts";
 
 export class Invantaire {
     public static _instance : Invantaire;
     private listesDesObjets : Objet[] = [new Potion(), new Potion(), new Ether(), new MorceauEtoile()];
     private dictionnaireQuantitées: { [nom: string]: number } = {};
+    private objetPossible : string[] = ["🧪 Potion","✨ Morceau d'étoile","🌟 Demi-étoile","💊 Éther"];
+    private ecrire : Ecrire = new Ecrire();
 
     public static get instance(){
         if (!Invantaire._instance){
@@ -31,8 +38,8 @@ export class Invantaire {
         return false;
     }
 
-    public retirerUnObjet(objet:Objet){
-        const nomObjetRecherche = objet.connaitreNomObjet();
+    public retirerUnObjet(nomObjetRecherche:string){
+        // const nomObjetRecherche = objet.connaitreNomObjet();
         for (let i = 0; i < this.listesDesObjets.length; i++) {
             if (this.listesDesObjets[i].connaitreNomObjet() == nomObjetRecherche){
                 this.listesDesObjets.splice(i, 1);
@@ -70,29 +77,50 @@ export class Invantaire {
             console.log("\nVotre sac est vide...");
         } else {
             console.log("\nVotre invantaire contient :");
-            this.ecrireLigneListeObjetInvantaire("🧪 Potion");
-            this.ecrireLigneListeObjetInvantaire("✨ Morceau d'étoile");
-            this.ecrireLigneListeObjetInvantaire("🌟 Demi-étoile");
-            this.ecrireLigneListeObjetInvantaire("💊 Éther");
+            for (let i = 0; i < this.objetPossible.length; i++) {
+                this.ecrireLigneListeObjetInvantaire(this.objetPossible[i]);
+            }
             console.log("");
         }
     }
 
-    public choisirUnObjetAConsomer(){
+    public async choisirUnObjetAConsomer(){
         let phrase = "Quel objets shouaiter vous utilisé ?";
         let listeNom : string[] = [];
-        let listeNumber : string[] = [];
-        for (let k = 0; k < this.dictionnaireQuantitées.length; k++) {
-            if (this.dictionnaireQuantitées[k] > 0){
-                listeNom.push(this.dictionnaireQuantitées[k].toString());
-                listeNumber.push(k.toString());
-                phrase += `${k+1} - ${this.dictionnaireQuantitées[k].toString()}`
+        for (let i = 0; i < this.objetPossible.length; i++) {
+            if (this.dictionnaireQuantitées[this.objetPossible[i]] && this.dictionnaireQuantitées[this.objetPossible[i]] > 0){
+                listeNom.push(this.objetPossible[i]);
             }
         }
-        console.log("/!\\ La fonction sera terminé plus tard /!\\ ");
-        // switch (this.JoueurFaitUnChoix(listeNumber,phrase)) {
-        //     case "1" :
-        //         this.ajouterObjet(listeNom)
-        // }
+        if (listeNom.length == 0) return;
+
+        const choix = new Choix();
+        const valeur = await choix.FaireUnChoix(listeNom)-1;
+        this.ecrire.EcrireUnePhrase(`Sur qui voulez-vous utiliser *Green*${listeNom[valeur]}*Reset* ?`);
+        const onPrendLesPerdu = true;
+        const listeNomPersonnage : string[] = [];
+        const listeNomPersonnageAventurier : Aventurier[] = [];
+        for (let i = 0; i < GameManager.instance.equipeA.length; i++) {
+            if (onPrendLesPerdu || GameManager.instance.equipeA[i].pvActuels > 0){
+                listeNomPersonnage.push(GameManager.instance.equipeA[i].nom);
+                listeNomPersonnageAventurier.push(GameManager.instance.equipeA[i]);
+            }         
+        }
+        const valeur2 = await choix.FaireUnChoix(listeNomPersonnage)-1;
+
+        switch (listeNom[valeur]) {
+            case "🧪 Potion":
+                new Potion().utiliserObjet(listeNomPersonnageAventurier[valeur2]);
+                break;
+            case "✨ Morceau d'étoile":
+                new MorceauEtoile().utiliserObjet(listeNomPersonnageAventurier[valeur2]);
+                break;
+            case "🌟 Demi-étoile":
+                new DemiEtoile().utiliserObjet(listeNomPersonnageAventurier[valeur2]);
+                break;
+            case "💊 Éther":
+                new Ether().utiliserObjet(listeNomPersonnageAventurier[valeur2]);
+                break;
+        }
     }
 }
