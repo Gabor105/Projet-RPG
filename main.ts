@@ -1,3 +1,3 @@
-import { GameManager } from "./classes/GameManager.ts";
+import { GameManager } from "./classes/gestion-du-jeu/GameManager.ts";
 
 GameManager.instance.lancerJeu();

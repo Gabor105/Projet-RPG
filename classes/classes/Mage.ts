@@ -1,14 +1,15 @@
 // Mage.ts
 import { Aventurier } from "../Aventurier.ts";
 import { Character} from "../Character.ts";
-import { Menu } from "../Menu.ts";
+import { Menu } from "../utils/Menu.ts";
+import données from '../données.json' with { type: 'json' };
 
 export class Mage extends Aventurier {
   coutSort: number;
 
   constructor(nom: string) {
-    // nom, pvMax, attaque, defense, vitesse, pmMax, pmActuels
-    super(nom, 80, 8, 3, 10, 50, 50);
+    const a = données.Mage;
+    super(nom, a.pvMax, a.attaque, a.defense, a.vitesse, a.pmMax);
     this.coutSort = 10;
   }
 

@@ -1,13 +1,14 @@
 import { Aventurier } from "../Aventurier.ts";
 import { Character } from "../Character.ts";
 import { Ecrire } from "../../Ecrire.ts";
-import { GameManager } from "../GameManager.ts";
-import { Choix } from "../Choix.ts";
+import { GameManager } from "../gestion-du-jeu/GameManager.ts";
+import { Choix } from "../utils/Choix.ts";
+import données from '../données.json' with { type: 'json' };
 
 export class Pretre extends Aventurier{
     constructor(nom: string) {
-        // nom, pvMax, attaque, defense, vitesse, pmMax, pmActuels
-        super(nom, 110, 4, 6, 8);
+        const a = données.Pretre;
+        super(nom, a.pvMax, a.attaque, a.defense, a.vitesse, a.pmMax);
     }
     /**
      * @param allies Il s'agit de l'alié qui doit être soigner. Cela peut s'agire du joueur lui-même.

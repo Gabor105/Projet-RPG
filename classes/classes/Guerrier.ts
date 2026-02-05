@@ -1,11 +1,13 @@
 // Guerrier.ts
 import { Aventurier } from "../Aventurier.ts";
 import { Character } from "../Character.ts";
-import { Menu } from "../Menu.ts";
+import { Menu } from "../utils/Menu.ts";
+import données from '../données.json' with { type: 'json' };
 
 export class Guerrier extends Aventurier {
   constructor(nom: string) {
-    super(nom, 120, 18, 8, 8);
+    const a = données.Guerrier;
+    super(nom, a.pvMax, a.attaque, a.defense, a.vitesse, a.pmMax);
   }
 
   public override async jouerTour(ennemis: Character[], allies: Character[]): Promise<void> {

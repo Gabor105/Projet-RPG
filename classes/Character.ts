@@ -22,7 +22,6 @@ export class Character {
     vitesse: number,
     cesUnJoueur : boolean,
     pmMax: number = 0,
-    pmActuels: number = 0,
   ) {
     this.nom = nom;
     this.pvMax = pvMax;
@@ -33,7 +32,7 @@ export class Character {
     this.cesUnJoueur = cesUnJoueur;
 
     this.pmMax = pmMax;
-    this.pmActuels = pmActuels;
+    this.pmActuels = pmMax;
   }
 
   // --------------------

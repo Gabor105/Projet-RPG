@@ -2,12 +2,13 @@ import { Character } from "./Character.ts";
 import { Aventurier } from "./Aventurier.ts";
 import { Monstre } from "./Monstre.ts";
 import { Ecrire } from "../Ecrire.ts";
-import { GameManager } from "./GameManager.ts";
+import { GameManager } from "./gestion-du-jeu/GameManager.ts";
 
 export class Fight {
   ecrire : Ecrire = new Ecrire();
   ordreTours: Character[];
   numeroTour: number = 1;
+  tempsAttante:number = 2;//temps de lecture entre les textes. (en seconde)
 
   constructor() {
     this.ordreTours = [...GameManager._instance.equipeA, ...GameManager._instance.equipeB];
@@ -50,10 +51,11 @@ export class Fight {
 
         if (perso instanceof Aventurier) {
           await perso.jouerTour(GameManager._instance.equipeB, GameManager._instance.equipeA);
+          await sleep(this.tempsAttante*1000);
         } else if (perso instanceof Monstre) {
           console.log("");
           await perso.jouerTour(GameManager._instance.equipeA);
-          prompt("");
+          await sleep(this.tempsAttante*1000);
         } else {
           const ciblesVivantes = GameManager._instance.equipeB.filter((e) => e.estVivant());
           if (ciblesVivantes.length > 0) {
@@ -83,3 +85,5 @@ export class Fight {
     }
   }
 }
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

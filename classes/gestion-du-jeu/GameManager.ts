@@ -1,11 +1,13 @@
 // GameManager.ts
-import {Character } from "./Character.ts";
-import { Fight } from "./Fight.ts";
-import { Monstre } from "./Monstre.ts";
-import { Menu } from "./Menu.ts";
-import { creerAventurier, TypeAventurier } from "./FabriqueAventurier.ts";
-import { Aventurier } from "./Aventurier.ts";
-import { Ecrire } from "../Ecrire.ts";
+import {Character } from "../Character.ts";
+import { Fight } from "../Fight.ts";
+import { Monstre } from "../Monstre.ts";
+import { Menu } from "../utils/Menu.ts";
+import { creerAventurier, TypeAventurier } from "../FabriqueAventurier.ts";
+import { Aventurier } from "../Aventurier.ts";
+import { Ecrire } from "../../Ecrire.ts";
+import {SalleCoffre} from "./SalleCoffre.ts";
+import données from '../données.json' with { type: 'json' };
 
 export class GameManager {
   public static _instance : GameManager;
@@ -22,23 +24,36 @@ export class GameManager {
   private constructor() {}
 
   public async lancerJeu() {
+    // introduction :
     console.log("=== RPG POO - B1 ===");
     console.log("Bienvenue dans le RPG en ligne de commande !");
     console.log("Vous allez choisir un groupe de 3 aventuriers.\n");
 
     this.equipeA = this.choisirGroupeAventuriers();
 
+    // constitution de l'équipe :
     console.log("\nVotre groupe d'aventuriers :");
     for (const perso of this.equipeA) {
       console.log(` - ${perso.nom}`);
     }
-
     this.equipeB = this.creerMonstresPourPremierCombat();
 
-    const fight : Fight = new Fight();
-    await fight.lancer();
-
-    console.log("\nFin de la partie (version simple - un seul combat).");
+    // const coffre0 : SalleCoffre = new SalleCoffre();
+    // await coffre0.ouvrirCoffre();
+    // déroulement de la partie :
+    //1.	Une salle avec un combat aléatoire ( 3 monstres) 🦹‍♀️🧟🧜‍♂️
+    const fight1 : Fight = new Fight();
+    await fight1.lancer();
+    //2.	Une salle avec un coffre 🧰, pouvant être un piège qui blesse le personnage l'ouvrant, ou deux objets aléatoires
+    const coffre1 : SalleCoffre = new SalleCoffre();
+    await coffre1.ouvrirCoffre();
+    //3.	Une seconde salle avec un combat aléatoire (3 monstres) 🦹‍♀️🧟🧜‍♂️
+    const fight2 : Fight = new Fight();
+    await fight2.lancer();
+    //4.	Une seconde salle avec un coffre (idem) 🧰
+    const coffre2 : SalleCoffre = new SalleCoffre();
+    await coffre2.ouvrirCoffre();
+    //5.	Une salle avec un Boss (monstre unique) 🧛
   }
 
   private choisirGroupeAventuriers(): Aventurier[] {
@@ -64,9 +79,14 @@ export class GameManager {
   }
 
   private creerMonstresPourPremierCombat(): Monstre[] {
-    const monstre1 = new Monstre("Orc", 100, 16, 5, 7);
-    const monstre2 = new Monstre("Gobelin", 70, 12, 2, 13);
-    const monstre3 = new Monstre("Troll", 140, 20, 8, 5);
+    const listePosibilitéEnnemie = [données.Orc, données.Gobelin, données.Troll, données.Liche, données.Golem_de_Pierre, données.Spectre];
+    const d1 = listePosibilitéEnnemie[Math.floor(Math.random() * listePosibilitéEnnemie.length)];
+    const d2 = listePosibilitéEnnemie[Math.floor(Math.random() * listePosibilitéEnnemie.length)];
+    const d3 = listePosibilitéEnnemie[Math.floor(Math.random() * listePosibilitéEnnemie.length)];
+
+    const monstre1 = new Monstre(d1.nom, d1.pvMax, d1.attaque, d1.defense, d1.vitesse);
+    const monstre2 = new Monstre(d2.nom, d2.pvMax, d2.attaque, d2.defense, d2.vitesse);
+    const monstre3 = new Monstre(d3.nom, d3.pvMax, d3.attaque, d3.defense, d3.vitesse);
 
     return [monstre1, monstre2, monstre3];
   }

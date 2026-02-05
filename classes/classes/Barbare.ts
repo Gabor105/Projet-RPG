@@ -1,13 +1,13 @@
 // Barbare.ts
 import { Aventurier } from "../Aventurier.ts";
 import { Character } from "../Character.ts";
-import { Menu } from "../Menu.ts";
+import { Menu } from "../utils/Menu.ts";
+import données from '../données.json' with { type: 'json' };
 
 export class Barbare extends Aventurier {
   constructor(nom: string) {
-    // nom, pvMax, attaque, defense, vitesse, pmMax, pmActuels
-    // Stats : attaque très élevée (22), défense faible (4)
-    super(nom, 130, 22, 4, 8);
+    const a = données.Barbare;
+    super(nom, a.pvMax, a.attaque, a.defense, a.vitesse, a.pmMax);
   }
 
   private berserk(cibles: Character[]): void {

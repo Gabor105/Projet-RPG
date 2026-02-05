@@ -2,8 +2,8 @@
 import { Character } from "./Character.ts";
 import { Ecrire } from "../Ecrire.ts";
 import { Invantaire } from "./Invantaire.ts";
-import { Menu } from "./Menu.ts";
-import { Choix } from "./Choix.ts";
+import { Menu } from "./utils/Menu.ts";
+import { Choix } from "./utils/Choix.ts";
 
 export abstract class Aventurier extends Character {
   constructor(
@@ -13,10 +13,9 @@ export abstract class Aventurier extends Character {
     defense: number,
     vitesse: number,
     pmMax: number = 0,
-    pmActuels: number = 0,
   ) {
     // On envoie tous les paramètres au constructeur de Character
-    super(nom, pvMax, attaque, defense, vitesse, true, pmMax, pmActuels);
+    super(nom, pvMax, attaque, defense, vitesse, true, pmMax);
   }
 
   abstract jouerTour(

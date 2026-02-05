@@ -1,4 +1,4 @@
-import { Ecrire } from "../Ecrire.ts";
+import { Ecrire } from "../../Ecrire.ts";
 import * as readline from 'node:readline';
 
 export class Choix {

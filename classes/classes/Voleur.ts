@@ -3,21 +3,21 @@ import { Aventurier } from "../Aventurier.ts";
 // import { Menu } from "./Menu.ts";
 import { Ecrire } from "../../Ecrire.ts";
 import { Character } from "../Character.ts";
-import { CalculeProbabilitées } from "../CalculeProbabilitées.ts";
+import { CalculeProbabilitées } from "../utils/CalculeProbabilitées.ts";
 import { Invantaire } from "../Invantaire.ts";
 import { Ether } from "../Objets/Ether.ts";
 import { MorceauEtoile } from "../Objets/MorceauEtoile.ts";
 import { DemiEtoile } from "../Objets/DemiEtoile.ts";
 import { Objet } from "../Objets/Objet.ts";
 import { Potion } from "../Objets/Potion.ts";
-import { GameManager } from "../GameManager.ts"
-import { before } from "node:test";
-import { Choix } from "../Choix.ts";
+import { GameManager } from "../gestion-du-jeu/GameManager.ts"
+import { Choix } from "../utils/Choix.ts";
+import données from '../données.json' with { type: 'json' };
 
 export class Voleur extends Aventurier {
     constructor(nom: string) {
-        // nom, pvMax, attaque, defense, vitesse, pmMax, pmActuels
-        super(nom, 110, 15, 9, 13);
+        const a = données.Voleur;
+        super(nom, a.pvMax, a.attaque, a.defense, a.vitesse, a.pmMax);
     }
 
     public voler(){
