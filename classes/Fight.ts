@@ -3,6 +3,7 @@ import { Aventurier } from "./Aventurier.ts";
 import { Monstre } from "./Monstre.ts";
 import { Ecrire } from "../Ecrire.ts";
 import { GameManager } from "./gestion-du-jeu/GameManager.ts";
+import { Boss } from "./Boss.ts";
 
 export class Fight {
   ecrire : Ecrire = new Ecrire();
@@ -10,7 +11,10 @@ export class Fight {
   numeroTour: number = 1;
   tempsAttante:number = 2;//temps de lecture entre les textes. (en seconde)
 
-  constructor() {
+  constructor(combatDeBoss:boolean) {
+    if (!combatDeBoss) GameManager.instance.equipeB = GameManager.instance.creerMonstresPourPremierCombat();
+    else GameManager.instance.equipeB = [new Boss()]
+
     this.ordreTours = [...GameManager._instance.equipeA, ...GameManager._instance.equipeB];
 
     this.ordreTours.sort((a, b) => b.vitesse - a.vitesse);

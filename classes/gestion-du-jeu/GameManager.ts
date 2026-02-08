@@ -8,6 +8,10 @@ import { Aventurier } from "../Aventurier.ts";
 import { Ecrire } from "../../Ecrire.ts";
 import {SalleCoffre} from "./SalleCoffre.ts";
 import données from '../données.json' with { type: 'json' };
+import {Invantaire} from "../Invantaire.ts";
+import {Potion} from "../Objets/Potion.ts";
+import {Ether} from "../Objets/Ether.ts";
+import {MorceauEtoile} from "../Objets/MorceauEtoile.ts";
 
 export class GameManager {
   public static _instance : GameManager;
@@ -30,7 +34,8 @@ export class GameManager {
     console.log("Vous allez choisir un groupe de 3 aventuriers.\n");
 
     this.equipeA = this.choisirGroupeAventuriers();
-
+    const fight0 : Fight = new Fight(true);
+    await fight0.lancer();
     // constitution de l'équipe :
     console.log("\nVotre groupe d'aventuriers :");
     for (const perso of this.equipeA) {
@@ -40,18 +45,20 @@ export class GameManager {
 
     // déroulement de la partie :
     //1.	Une salle avec un combat aléatoire ( 3 monstres) 🦹‍♀️🧟🧜‍♂️
-    const fight1 : Fight = new Fight();
+    const fight1 : Fight = new Fight(false);
     await fight1.lancer();
     //2.	Une salle avec un coffre 🧰, pouvant être un piège qui blesse le personnage l'ouvrant, ou deux objets aléatoires
     const coffre1 : SalleCoffre = new SalleCoffre();
     await coffre1.ouvrirCoffre();
     //3.	Une seconde salle avec un combat aléatoire (3 monstres) 🦹‍♀️🧟🧜‍♂️
-    const fight2 : Fight = new Fight();
+    const fight2 : Fight = new Fight(false);
     await fight2.lancer();
     //4.	Une seconde salle avec un coffre (idem) 🧰
     const coffre2 : SalleCoffre = new SalleCoffre();
     await coffre2.ouvrirCoffre();
     //5.	Une salle avec un Boss (monstre unique) 🧛
+    const fight3 : Fight = new Fight(true);
+    await fight3.lancer();
   }
 
   private choisirGroupeAventuriers(): Aventurier[] {
@@ -76,7 +83,7 @@ export class GameManager {
     return equipe;
   }
 
-  private creerMonstresPourPremierCombat(): Monstre[] {
+  public creerMonstresPourPremierCombat(): Monstre[] {
     const listePosibilitéEnnemie = [données.Orc, données.Gobelin, données.Troll, données.Liche, données.Golem_de_Pierre, données.Spectre];
     const d1 = listePosibilitéEnnemie[Math.floor(Math.random() * listePosibilitéEnnemie.length)];
     const d2 = listePosibilitéEnnemie[Math.floor(Math.random() * listePosibilitéEnnemie.length)];

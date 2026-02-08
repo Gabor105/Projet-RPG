@@ -44,7 +44,7 @@ export class Character {
   }
 
   subirDegats(valeurDegats: number): void {
-    const degatsEffectifs = Math.max(0, valeurDegats - this.defense);
+    const degatsEffectifs = Math.max(1, valeurDegats - this.defense);
     this.pvActuels = Math.max(0, this.pvActuels - degatsEffectifs);
     new Ecrire().EcrireUnePhrase(`\n*Blue*${this.nom}*Reset* subit *Red*${degatsEffectifs}*Reset* dégâts.\nPV restants : *Red*${this.pvActuels}/${this.pvMax}*Reset*`);
   }

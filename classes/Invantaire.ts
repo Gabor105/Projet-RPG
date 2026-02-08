@@ -97,7 +97,7 @@ export class Invantaire {
         const choix = new Choix();
         const valeur = await choix.FaireUnChoix(listeNom)-1;
         this.ecrire.EcrireUnePhrase(`Sur qui voulez-vous utiliser *Green*${listeNom[valeur]}*Reset* ?`);
-        const onPrendLesPerdu = true;
+        const onPrendLesPerdu = listeNom[valeur] == "✨ Morceau d'étoile" || listeNom[valeur] == "🌟 Demi-étoile";
         const listeNomPersonnage : string[] = [];
         const listeNomPersonnageAventurier : Aventurier[] = [];
         for (let i = 0; i < GameManager.instance.equipeA.length; i++) {
