@@ -43,7 +43,7 @@ export class Paladin extends Aventurier {
     if (!this.phraseTours()) return;
     const choix = new Choix();
     console.log("Que veut-tu faire ?");
-    const valeur = await choix.FaireUnChoix(["1 - Attaque sainte (tous les ennemis)","2 - Attaquer physique","3 - Invantaire","4 - Voir les statistiques des personnages","5 - Ne rien faire"]);
+    const valeur = await choix.faireUnChoix(["1 - Attaque sainte (tous les ennemis)","2 - Attaquer physique","3 - Invantaire","4 - Voir les statistiques des personnages","5 - Ne rien faire"]);
     
     switch (valeur) {
       case 1 :
@@ -60,7 +60,7 @@ export class Paladin extends Aventurier {
         this.jouerTour(ennemis, allies);
         break;
       case 5 :
-        new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");
+        new Ecrire().ecrireUnePhrase("Bien, l'aison le temps s'écouler.");
         break;
     }
   }

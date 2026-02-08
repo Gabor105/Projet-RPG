@@ -24,7 +24,7 @@ export class Voleur extends Aventurier {
         const probabilitéesNombre : number[] = [40,30,15,10,5];
         const texte =  "Le voleur à voler "
         const probabilitéPhrase : string[] = ["Le voleur n'as rien voler.", texte+"une potion !", texte+"un fragment d'étoile !", texte+"un éther !", texte+"une demi-étoile !!!"];
-        const vole : number = CalculeProbabilitées.Probabilitées(probabilitéesNombre,probabilitéPhrase.length);
+        const vole : number = CalculeProbabilitées.probabilitées(probabilitéesNombre,probabilitéPhrase.length);
         let objet : Objet | null = null;
         switch (vole) {
             case 1:
@@ -44,14 +44,14 @@ export class Voleur extends Aventurier {
             Invantaire.instance.ajouterObjet(objet);
         }
         const classEcriture : Ecrire = new Ecrire();
-        classEcriture.EcrireUnePhrase(probabilitéPhrase[vole]);
+        classEcriture.ecrireUnePhrase(probabilitéPhrase[vole]);
     }
 
     public override async jouerTour(ennemis: Character[], allies: Character[]) : Promise<void>{
         if (!this.phraseTours()) return;
         const choix = new Choix();
         console.log("Que veut-tu faire ?");
-        const valeur = await choix.FaireUnChoix(["1 - voler","2 - Attaquer","3 - Invantaire","4 - Voir les statistiques des personnages","5 - Ne rien faire"]);
+        const valeur = await choix.faireUnChoix(["1 - voler","2 - Attaquer","3 - Invantaire","4 - Voir les statistiques des personnages","5 - Ne rien faire"]);
 
         switch (valeur) {
             case 1 :
@@ -68,7 +68,7 @@ export class Voleur extends Aventurier {
                 await this.jouerTour(ennemis, allies);
                 break;
             case 5:
-                new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");
+                new Ecrire().ecrireUnePhrase("Bien, l'aison le temps s'écouler.");
                 break;
         }
     }

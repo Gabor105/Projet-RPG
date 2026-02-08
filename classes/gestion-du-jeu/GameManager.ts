@@ -86,36 +86,36 @@ export class GameManager {
     const d2 = listePosibilitéEnnemie[Math.floor(Math.random() * listePosibilitéEnnemie.length)];
     const d3 = listePosibilitéEnnemie[Math.floor(Math.random() * listePosibilitéEnnemie.length)];
 
-    const monstre1 = new Monstre(d1.nom, d1.pvMax, d1.attaque, d1.defense, d1.vitesse);
-    const monstre2 = new Monstre(d2.nom, d2.pvMax, d2.attaque, d2.defense, d2.vitesse);
-    const monstre3 = new Monstre(d3.nom, d3.pvMax, d3.attaque, d3.defense, d3.vitesse);
+    const monstre1 = new Monstre(d1.nom, d1.pvMax, d1.attaque, d1.defense, d1.vitesse, d1.pmMax);
+    const monstre2 = new Monstre(d2.nom, d2.pvMax, d2.attaque, d2.defense, d2.vitesse, d2.pmMax);
+    const monstre3 = new Monstre(d3.nom, d3.pvMax, d3.attaque, d3.defense, d3.vitesse, d3.pmMax);
 
     return [monstre1, monstre2, monstre3];
   }
 
   public afficherLesStatistiques(){
     const e = new Ecrire();
-    e.EcrireUnePhrase(` === AMIS ===\n`);
+    e.ecrireUnePhrase(` === AMIS ===\n`);
     for (let i = 0; i < this.equipeA.length; i++) {
-      e.EcrireUnePhrase(` │ NOM     : ${this.equipeA[i].nom}\n`);
-      e.EcrireUnePhrase(` │ PV max  : ${this.equipeA[i].pvMax}\n`);
-      e.EcrireUnePhrase(` │ PV      : ${this.equipeA[i].pvActuels}\n`);
-      e.EcrireUnePhrase(` │ Attaque : ${this.equipeA[i].attaque}\n`);
-      e.EcrireUnePhrase(` │ Défense : ${this.equipeA[i].defense}\n`);
-      e.EcrireUnePhrase(` │ Vitesse : ${this.equipeA[i].vitesse}\n`);
-      if (this.equipeA[i].pmMax > 0) e.EcrireUnePhrase(` │ PM max  : ${this.equipeA[i].pmMax}\n`);
-      if (this.equipeA[i].pmMax > 0) e.EcrireUnePhrase(` │ PM      : ${this.equipeA[i].pmActuels}\n\n`);
+      e.ecrireUnePhrase(` │ NOM     : ${this.equipeA[i].nom}\n`);
+      e.ecrireUnePhrase(` │ PV max  : ${this.equipeA[i].pvMax}\n`);
+      e.ecrireUnePhrase(` │ PV      : ${this.equipeA[i].pvActuels}\n`);
+      e.ecrireUnePhrase(` │ Attaque : ${this.equipeA[i].attaque}\n`);
+      e.ecrireUnePhrase(` │ Défense : ${this.equipeA[i].defense}\n`);
+      e.ecrireUnePhrase(` │ Vitesse : ${this.equipeA[i].vitesse}\n`);
+      if (this.equipeA[i].pmMax > 0) e.ecrireUnePhrase(` │ PM max  : ${this.equipeA[i].pmMax}\n`);
+      if (this.equipeA[i].pmMax > 0) e.ecrireUnePhrase(` │ PM      : ${this.equipeA[i].pmActuels}\n\n`);
     }
-    e.EcrireUnePhrase(` === ENNEMIES ===\n`);
+    e.ecrireUnePhrase(` === ENNEMIES ===\n`);
     for (let i = 0; i < this.equipeB.length; i++) {
-      e.EcrireUnePhrase(` │ NOM     : ${this.equipeB[i].nom}\n`);
-      e.EcrireUnePhrase(` │ PV max  : ${this.equipeB[i].pvMax}\n`);
-      e.EcrireUnePhrase(` │ PV      : ${this.equipeB[i].pvActuels}\n`);
-      e.EcrireUnePhrase(` │ Attaque : ${this.equipeB[i].attaque}\n`);
-      e.EcrireUnePhrase(` │ Défense : ${this.equipeB[i].defense}\n`);
-      e.EcrireUnePhrase(` │ Vitesse : ${this.equipeB[i].vitesse}\n`);
-      if (this.equipeA[i].pmMax > 0) e.EcrireUnePhrase(` │ PM max  : ${this.equipeB[i].pmMax}\n`);
-      if (this.equipeA[i].pmMax > 0) e.EcrireUnePhrase(` │ PM      : ${this.equipeB[i].pmActuels}\n\n`);
+      e.ecrireUnePhrase(` │ NOM     : ${this.equipeB[i].nom}\n`);
+      e.ecrireUnePhrase(` │ PV max  : ${this.equipeB[i].pvMax}\n`);
+      e.ecrireUnePhrase(` │ PV      : ${this.equipeB[i].pvActuels}\n`);
+      e.ecrireUnePhrase(` │ Attaque : ${this.equipeB[i].attaque}\n`);
+      e.ecrireUnePhrase(` │ Défense : ${this.equipeB[i].defense}\n`);
+      e.ecrireUnePhrase(` │ Vitesse : ${this.equipeB[i].vitesse}\n`);
+      if (this.equipeA[i].pmMax > 0) e.ecrireUnePhrase(` │ PM max  : ${this.equipeB[i].pmMax}\n`);
+      if (this.equipeA[i].pmMax > 0) e.ecrireUnePhrase(` │ PM      : ${this.equipeB[i].pmActuels}\n\n`);
     }
   }
 }

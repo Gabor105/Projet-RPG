@@ -6,7 +6,7 @@ import { GameManager } from "./gestion-du-jeu/GameManager.ts";
 import { Boss } from "./Boss.ts";
 
 export class Fight {
-  ecrire : Ecrire = new Ecrire();
+  private ecrire : Ecrire = new Ecrire();
   ordreTours: Character[];
   numeroTour: number = 1;
   tempsAttante:number = 2;//temps de lecture entre les textes. (en seconde)
@@ -21,14 +21,14 @@ export class Fight {
   }
 
   private afficherEtatEquipes(): void {
-    this.ecrire.EcrireUnePhrase("\n--- État des équipes ---\n");
+    this.ecrire.ecrireUnePhrase("\n--- État des équipes ---\n");
     console.log("Équipe A :");
     for (const perso of GameManager.instance.equipeA) {
-      this.ecrire.EcrireUnePhrase(` - *Green*${perso.nom}*Reset* : *Red*${perso.pvActuels}/${perso.pvMax} PV*Reset*\n`);
+      this.ecrire.ecrireUnePhrase(` - *Green*${perso.nom}*Reset* : *Red*${perso.pvActuels}/${perso.pvMax} PV*Reset*\n`);
     }
     console.log("Équipe B :");
     for (const perso of GameManager.instance.equipeB) {
-      this.ecrire.EcrireUnePhrase(` - *Green*${perso.nom}*Reset* : *Red*${perso.pvActuels}/${perso.pvMax} PV*Reset*\n`);
+      this.ecrire.ecrireUnePhrase(` - *Green*${perso.nom}*Reset* : *Red*${perso.pvActuels}/${perso.pvMax} PV*Reset*\n`);
     }
     console.log("------------------------\n");
   }
@@ -38,7 +38,7 @@ export class Fight {
   }
 
   async lancer() {
-    this.ecrire.EcrireUnePhrase(">>> Début du combat !");
+    this.ecrire.ecrireUnePhrase(">>> Début du combat !");
     this.afficherEtatEquipes();
 
     while (true) {

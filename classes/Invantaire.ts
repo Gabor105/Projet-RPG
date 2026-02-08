@@ -95,8 +95,8 @@ export class Invantaire {
         if (listeNom.length == 0) return;
 
         const choix = new Choix();
-        const valeur = await choix.FaireUnChoix(listeNom)-1;
-        this.ecrire.EcrireUnePhrase(`Sur qui voulez-vous utiliser *Green*${listeNom[valeur]}*Reset* ?`);
+        const valeur = await choix.faireUnChoix(listeNom)-1;
+        this.ecrire.ecrireUnePhrase(`Sur qui voulez-vous utiliser *Green*${listeNom[valeur]}*Reset* ?`);
         const onPrendLesPerdu = listeNom[valeur] == "✨ Morceau d'étoile" || listeNom[valeur] == "🌟 Demi-étoile";
         const listeNomPersonnage : string[] = [];
         const listeNomPersonnageAventurier : Aventurier[] = [];
@@ -106,7 +106,7 @@ export class Invantaire {
                 listeNomPersonnageAventurier.push(GameManager.instance.equipeA[i]);
             }         
         }
-        const valeur2 = await choix.FaireUnChoix(listeNomPersonnage)-1;
+        const valeur2 = await choix.faireUnChoix(listeNomPersonnage)-1;
 
         switch (listeNom[valeur]) {
             case "🧪 Potion":

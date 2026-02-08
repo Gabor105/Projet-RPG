@@ -32,14 +32,14 @@ export class Ecrire {
         "*GrayBg*": "\x1b[100m",
     };
 
-    public EcrireUnePhrase(phrase: string) {
+    public ecrireUnePhrase(phrase: string) {
         for (const key in Ecrire.styleMap) {
             phrase = phrase.replaceAll(key, Ecrire.styleMap[key]);
         }
         process.stdout.write(phrase + "\x1b[0m");
     }
 
-    public EffacerLigne(nombre:number){
+    public effacerLigne(nombre:number){
         const remonter = "\x1b[1A";
         const effacer = "\x1b[2K";
         for (let i = 0; i < nombre; i++) {

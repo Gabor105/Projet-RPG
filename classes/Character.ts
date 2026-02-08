@@ -13,6 +13,7 @@ export class Character {
   pmMax: number;
   pmActuels: number;
   public cesUnJoueur : boolean;
+  coutSort: number = 10;
 
   constructor(
     nom: string,
@@ -35,58 +36,69 @@ export class Character {
     this.pmActuels = pmMax;
   }
 
-  // --------------------
-  // Méthodes de base POO
-  // --------------------
-
   estVivant(): boolean {
     return this.pvActuels > 0;
   }
 
-  subirDegats(valeurDegats: number): void {
-    const degatsEffectifs = Math.max(1, valeurDegats - this.defense);
+  subirDegats(valeurDegats: number, magique:boolean=false): void {
+    let degatsEffectifs = Math.max(1, valeurDegats - this.defense);
+    if (magique){
+      degatsEffectifs = Math.max(1, valeurDegats);
+    }
     this.pvActuels = Math.max(0, this.pvActuels - degatsEffectifs);
-    new Ecrire().EcrireUnePhrase(`\n*Blue*${this.nom}*Reset* subit *Red*${degatsEffectifs}*Reset* dégâts.\nPV restants : *Red*${this.pvActuels}/${this.pvMax}*Reset*`);
+    new Ecrire().ecrireUnePhrase(`\n*Blue*${this.nom}*Reset* subit *Red*${degatsEffectifs}*Reset* dégâts.\nPV restants : *Red*${this.pvActuels}/${this.pvMax}*Reset*`);
   }
 
   soignerPourcentage(pourcentage: number): void {
     if (!this.estVivant()) {
-      new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* est *Red*K.O*Reset*. et ne peut pas être soigné de cette façon.`);
+      new Ecrire().ecrireUnePhrase(`*Blue*${this.nom}*Reset* est *Red*K.O*Reset*. et ne peut pas être soigné de cette façon.`);
       return;
     }
 
     const soin = Math.floor((this.pvMax * pourcentage) / 100);
     this.pvActuels = Math.min(this.pvMax, this.pvActuels + soin);
-    new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* récupère *Red*${soin} PV*Reset*.\nPV : *Red*${this.pvActuels}/${this.pvMax}*Reset*`);
+    new Ecrire().ecrireUnePhrase(`*Blue*${this.nom}*Reset* récupère *Red*${soin} PV*Reset*.\nPV : *Red*${this.pvActuels}/${this.pvMax}*Reset*`);
   }
 
   ressusciter(pourcentage: number): void {
     if (this.estVivant()) {
       const soin = Math.floor((this.pvMax * pourcentage) / 100);
       this.pvActuels = Math.min(this.pvMax, this.pvActuels + soin);
-      new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* est déjà vivant, il est soigné de *Red*${soin} PV*Reset*.\nPV : *Red*${this.pvActuels}/${this.pvMax}*Reset*`);
+      new Ecrire().ecrireUnePhrase(`*Blue*${this.nom}*Reset* est déjà vivant, il est soigné de *Red*${soin} PV*Reset*.\nPV : *Red*${this.pvActuels}/${this.pvMax}*Reset*`);
       return;
     }
 
     const pvRestaure = Math.floor((this.pvMax * pourcentage) / 100);
     this.pvActuels = Math.max(1, pvRestaure);
-    new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* est ressuscité avec *Red*${this.pvActuels}/${this.pvMax} PV*Reset* !`);
+    new Ecrire().ecrireUnePhrase(`*Blue*${this.nom}*Reset* est ressuscité avec *Red*${this.pvActuels}/${this.pvMax} PV*Reset* !`);
   }
 
   attaqueBasique(cible: Character): void {
     if (!this.estVivant()) {
-      new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* est *Red*K.O*Reset*. et ne peut pas attaquer.`);
+      new Ecrire().ecrireUnePhrase(`*Blue*${this.nom}*Reset* est déjà *Red*K.O*Reset*. Il ne peut pas attaquer.`);
       return;
     }
 
-    new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* attaque *Blue*${cible.nom}*Reset* !`);
+    new Ecrire().ecrireUnePhrase(`*Blue*${this.nom}*Reset* attaque *Blue*${cible.nom}*Reset* !`);
     cible.subirDegats(this.attaque);
   }
 
-  // -------------------------------
-  // Méthodes pour la gestion des objets
-  // (équivalentes aux méthodes de  Emerick)
-  // -------------------------------
+  attaqueMagique(cible: Character): void {
+    if (this.pmActuels < this.coutSort) {
+      console.log(`${this.nom} n'a pas assez de PM pour lancer un sort.`);
+      return;
+    }
+
+    this.pmActuels -= this.coutSort;
+
+    // Dégâts magiques : on ignore la défense
+    const degats = this.attaque * 2;
+    console.log(`${this.nom} lance un sort sur ${cible.nom} et inflige ${degats} dégâts magiques !`);
+
+    // On applique directement les dégâts magiques
+    cible.pvActuels = Math.max(0, cible.pvActuels - degats);
+    console.log(`${cible.nom} a maintenant ${cible.pvActuels}/${cible.pvMax} PV.`);
+  }
 
   // Soigner une QUANTITÉ brute de PV (utilisé par Potion, MorceauEtoile, DemiEtoile)
   soignerQuantite(quantite: number): void {
@@ -95,7 +107,7 @@ export class Character {
       this.pvMax,
       this.pvActuels + Math.floor(quantite),
     );
-    new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* est soigné de *Red*${Math.floor(quantite)} PV*Reset*.\nPV : *Red*${this.pvActuels}/${this.pvMax}*Reset*`);
+    new Ecrire().ecrireUnePhrase(`*Blue*${this.nom}*Reset* est soigné de *Red*${Math.floor(quantite)} PV*Reset*.\nPV : *Red*${this.pvActuels}/${this.pvMax}*Reset*`);
   }
 
   // Équivalent de "êtreSoingner(quantitée:number)"
@@ -109,26 +121,14 @@ export class Character {
       this.pmMax,
       this.pmActuels + Math.floor(quantite),
     );
-    new Ecrire().EcrireUnePhrase(`*Blue*${this.nom}*Reset* récupère *Green*${Math.floor(quantite)} PM*Reset*. PM : *Green*${this.pmActuels}/${this.pmMax}*Reset*`);
+    new Ecrire().ecrireUnePhrase(`*Blue*${this.nom}*Reset* récupère *Green*${Math.floor(quantite)} PM*Reset*. PM : *Green*${this.pmActuels}/${this.pmMax}*Reset*`);
   }
-
-  // Équivalent demandé par ton collègue : "augmanterPM"
-  augmanterPM(quantite: number): void {
-    this.augmenterPM(quantite);
-  }
-
-  // Getters compatibles avec son code
 
   lireVieMaximum(): number {
     return this.pvMax;
   }
 
   lireVieActuelle(): number {
-    return this.pvActuels;
-  }
-
-  // Pour rester compatible avec son nom "lireVieActuel"
-  lireVieActuel(): number {
     return this.pvActuels;
   }
 

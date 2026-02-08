@@ -8,7 +8,7 @@ export class MorceauEtoile extends Objet {
             console.log("Le sac est vide, vous ne pouvez pas utilisez cet objet !");
             return;
         }
-        const vieActuel :number = character.lireVieActuel();
+        const vieActuel :number = character.lireVieActuelle();
         const vieMaximum : number = character.lireVieMaximum();
         if (vieActuel <= 0){
             character.êtreSoingner(vieMaximum*0.80);

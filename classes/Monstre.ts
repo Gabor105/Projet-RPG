@@ -9,8 +9,9 @@ export class Monstre extends Character {
     attaque: number,
     defense: number,
     vitesse: number,
+    pmMax: number = 0,
   ) {
-    super(nom, pvMax, attaque, defense, vitesse, false);
+    super(nom, pvMax, attaque, defense, vitesse, false, pmMax);
   }
 
   jouerTour(cibles: Aventurier[]): void {    
@@ -27,13 +28,17 @@ export class Monstre extends Character {
     if (random <= 0.2) {
       // 20% : attaque le personnage avec le moins de PV vivant
       cible = ciblesVivantes.reduce((a, b) => 
-        a.lireVieActuel() < b.lireVieActuel() ? a : b
+        a.lireVieActuelle() < b.lireVieActuelle() ? a : b
       );
     } else {
       // 80% : attaque un aventurier vivant au hasard
       const index = Math.floor(Math.random() * ciblesVivantes.length);
       cible = ciblesVivantes[index];
     }
-    this.attaqueBasique(cible);
+    if (this.pmActuels > 0 && Math.floor(Math.random() * 101)> 40){
+      this.attaqueMagique(cible);
+    } else {
+      this.attaqueBasique(cible);
+    }
   }
 }

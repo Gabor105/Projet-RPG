@@ -8,7 +8,7 @@ export class Ether extends Objet {
             console.log("Le sac est vide, vous ne pouvez pas utilisez cet objet !");
             return;
         }
-        character.augmanterPM(character.lirePMMaximum()*0.7);
+        character.augmenterPM(character.lirePMMaximum()*0.7);
         Invantaire.instance.retirerUnObjet(this.connaitreNomObjet());
     }
     override connaitreNomObjet(): string {

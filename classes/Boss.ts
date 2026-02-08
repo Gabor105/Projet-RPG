@@ -5,10 +5,10 @@ import { Aventurier } from "./Aventurier.ts";
 export class Boss extends Monstre{
     constructor(){
         const a = données.Boss;
-        super(a.nom, a.pvMax, a.attaque, a.defense, a.vitesse);
+        super(a.nom, a.pvMax, a.attaque, a.defense, a.vitesse, a.pmMax);
     }
 
-    jouerTour(cibles: Aventurier[]): void {    
+    override jouerTour(cibles: Aventurier[]): void {    
         if (Math.floor(Math.random() * 101) <= 70){
             super.jouerTour(cibles);
         } else {

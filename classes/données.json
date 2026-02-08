@@ -53,7 +53,7 @@
         "attaque" : 16,
         "defense" : 5,
         "vitesse" : 7,
-        "pmMax" : 0
+        "pmMax" : 2
     },
     "Gobelin":{
         "nom" : "Gobelin",
@@ -77,7 +77,7 @@
         "attaque": 12,
         "defense": 4,
         "vitesse": 9,
-        "pmMax": 0
+        "pmMax": 16
     },
     "Golem_de_Pierre": {
         "nom": "Golem de Pierre",
@@ -93,7 +93,7 @@
         "attaque": 18,
         "defense": 12,
         "vitesse": 15,
-        "pmMax": 0
+        "pmMax": 12
     },
     "Boss": {
         "nom": "Boss",

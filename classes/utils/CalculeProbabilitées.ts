@@ -1,5 +1,5 @@
 export class CalculeProbabilitées{
-    public static Probabilitées(probabilitéesNombre:number[], nombreProbabilitéPhrases:number):number{
+    public static probabilitées(probabilitéesNombre:number[], nombreProbabilitéPhrases:number):number{
         let total : number = 0;
         for (let k of probabilitéesNombre) {
             total += k

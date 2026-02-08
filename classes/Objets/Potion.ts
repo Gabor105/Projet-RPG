@@ -8,7 +8,7 @@ export class Potion extends Objet{
             console.log("Le sac est vide, vous ne pouvez pas utilisez cet objet !");
             return;
         }
-        if (character.lireVieActuel() > 0){
+        if (character.lireVieActuelle() > 0){
             character.êtreSoingner(character.lireVieMaximum()*0.5);
             Invantaire.instance.retirerUnObjet(this.connaitreNomObjet());
         }

@@ -38,7 +38,7 @@ export abstract class Aventurier extends Character {
    * @param phrase La phrasse qui dit se qui est attendu (facultatif).
    * @returns la réponse choisie.
   */
-  protected JoueurFaitUnChoix(réponseAutorisées:string[], phrase:string = ""):string{
+  protected joueurFaitUnChoix(réponseAutorisées:string[], phrase:string = ""):string{
     // let retoursALaLigne = 1;
     // for (let i = 0; i < phrase.length; i++) {
     //   if (phrase[i] === '\\'){
@@ -47,11 +47,11 @@ export abstract class Aventurier extends Character {
     //   }
     // }
     // console.log(retoursALaLigne);
-    if (phrase != "") new Ecrire().EcrireUnePhrase(phrase+"\n");
+    if (phrase != "") new Ecrire().ecrireUnePhrase(phrase+"\n");
     let réponse : string | null = null;
     while (réponse == null) {
       réponse = prompt("Votre choix :");
-      new Ecrire().EffacerLigne(4);
+      new Ecrire().effacerLigne(4);
       if (réponse != null && réponseAutorisées.includes(réponse)){
         return réponse;
       } else {
@@ -67,7 +67,7 @@ export abstract class Aventurier extends Character {
       recomancer = false;
       const choix = new Choix();
       console.log("Que veut-tu faire ?");
-      const valeur = await choix.FaireUnChoix(["1 - voir les objets du sac","2 - Utiliser un objet","3 - Ne rien faire"]);
+      const valeur = await choix.faireUnChoix(["1 - voir les objets du sac","2 - Utiliser un objet","3 - Ne rien faire"]);
 
       switch (valeur) {
         case 1 :
@@ -78,7 +78,7 @@ export abstract class Aventurier extends Character {
           await Invantaire.instance.choisirUnObjetAConsomer();
           break;
         case 3 :
-          new Ecrire().EcrireUnePhrase("Bien, l'aison le temps s'écouler.");
+          new Ecrire().ecrireUnePhrase("Bien, l'aison le temps s'écouler.");
           break;
       }
     }

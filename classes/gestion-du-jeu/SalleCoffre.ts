@@ -15,8 +15,8 @@ export class SalleCoffre{
     private dégàEnCasDePiège:number=20;
 
     public async ouvrirCoffre(){
-        this.ecrire.EcrireUnePhrase("Vous avez trouver un *Blue*coffre*Reset* !\n");
-        this.ecrire.EcrireUnePhrase("Mais c'est peut-être un piège... Quel personnages vas prendre le risque de l'ouvrir ?\n");
+        this.ecrire.ecrireUnePhrase("Vous avez trouver un *Blue*coffre*Reset* !\n");
+        this.ecrire.ecrireUnePhrase("Mais c'est peut-être un piège... Quel personnages vas prendre le risque de l'ouvrir ?\n");
         const listeNom : string[] = [];
         for (let i = 0; i < GameManager.instance.equipeA.length; i++) {
             if (GameManager.instance.equipeA[i].pvActuels > 0){
@@ -24,19 +24,19 @@ export class SalleCoffre{
             }
         }
         if (listeNom.length == 0){
-            this.ecrire.EcrireUnePhrase("Personne n'est en état d'ouvrir se coffre...\n");// cette phrasse ne doit jamais être afficher.
+            this.ecrire.ecrireUnePhrase("Personne n'est en état d'ouvrir se coffre...\n");// cette phrasse ne doit jamais être afficher.
             return;
         }
         const choix = new Choix();
-        const valeur = await choix.FaireUnChoix(listeNom)-1;
-        this.ecrire.EcrireUnePhrase(`*Green*${GameManager.instance.equipeA[valeur].nom}*Reset* ouvre le coffre !\n`);
+        const valeur = await choix.faireUnChoix(listeNom)-1;
+        this.ecrire.ecrireUnePhrase(`*Green*${GameManager.instance.equipeA[valeur].nom}*Reset* ouvre le coffre !\n`);
             
         const random = Math.floor(Math.random() * 101);
         if (random<=this.probabilitéDePiège){
-            this.ecrire.EcrireUnePhrase(`C'était un piège !\n`);
+            this.ecrire.ecrireUnePhrase(`C'était un piège !\n`);
             GameManager.instance.equipeA[valeur].subirDegats(this.dégàEnCasDePiège);
         } else {
-            this.ecrire.EcrireUnePhrase(`Ce n'était pas un piège !\n`);
+            this.ecrire.ecrireUnePhrase(`Ce n'était pas un piège !\n`);
             if (random <= 5){
                 this.cadeauDuCoffre(new Ether());
             }
@@ -51,11 +51,11 @@ export class SalleCoffre{
             
             // affichage pour l'utilisateur :
             if (this.objets.length == 0){
-                this.ecrire.EcrireUnePhrase("Oh non ! Il était vide...\n");// cela ne doit jamais être afficher.
+                this.ecrire.ecrireUnePhrase("Oh non ! Il était vide...\n");// cela ne doit jamais être afficher.
             } else {
-                this.ecrire.EcrireUnePhrase("\nVous avez obtenu :\n");
+                this.ecrire.ecrireUnePhrase("\nVous avez obtenu :\n");
                 for (let i = 0; i < this.objets.length; i++) {
-                    this.ecrire.EcrireUnePhrase(`| *Green*${this.objets[i].connaitreNomObjet()}*Reset*\n`);
+                    this.ecrire.ecrireUnePhrase(`| *Green*${this.objets[i].connaitreNomObjet()}*Reset*\n`);
                 }            
             }
         }
