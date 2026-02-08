@@ -34,14 +34,11 @@ export class GameManager {
     console.log("Vous allez choisir un groupe de 3 aventuriers.\n");
 
     this.equipeA = this.choisirGroupeAventuriers();
-    const fight0 : Fight = new Fight(true);
-    await fight0.lancer();
     // constitution de l'équipe :
     console.log("\nVotre groupe d'aventuriers :");
     for (const perso of this.equipeA) {
       console.log(` - ${perso.nom}`);
     }
-    this.equipeB = this.creerMonstresPourPremierCombat();
 
     // déroulement de la partie :
     //1.	Une salle avec un combat aléatoire ( 3 monstres) 🦹‍♀️🧟🧜‍♂️

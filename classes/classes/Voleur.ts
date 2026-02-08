@@ -41,7 +41,7 @@ export class Voleur extends Aventurier {
                 break;
         }
         if (objet != null){
-            Invantaire._instance.ajouterObjet(objet);
+            Invantaire.instance.ajouterObjet(objet);
         }
         const classEcriture : Ecrire = new Ecrire();
         classEcriture.EcrireUnePhrase(probabilitéPhrase[vole]);
@@ -64,7 +64,7 @@ export class Voleur extends Aventurier {
                 await this.regarderInvantaire();
                 break;
             case 4 :
-                GameManager._instance.afficherLesStatistiques();
+                GameManager.instance.afficherLesStatistiques();
                 await this.jouerTour(ennemis, allies);
                 break;
             case 5:

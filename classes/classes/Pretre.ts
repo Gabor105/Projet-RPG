@@ -49,7 +49,7 @@ export class Pretre extends Aventurier{
                 await this.regarderInvantaire();
                 break;
             case 4 :
-                GameManager._instance.afficherLesStatistiques();
+                GameManager.instance.afficherLesStatistiques();
                 this.jouerTour(ennemis, allies);
                 break;
             case 5:
