@@ -2,7 +2,6 @@
 import { Aventurier } from "../Aventurier.ts";
 import { Character } from "../Character.ts";
 import { Menu } from "../utils/Menu.ts";
-import { GameManager } from "../gestion-du-jeu/GameManager.ts";
 import données from '../données.json' with { type: 'json' };
 
 export class Guerrier extends Aventurier {
@@ -56,7 +55,7 @@ export class Guerrier extends Aventurier {
     } else if (actionChoisie === "INVANTAIRE") { 
       await this.regarderInvantaire();
     } else if (actionChoisie === "STATISTIQUE") { 
-      GameManager.instance.afficherLesStatistiques();
+      this.afficherLesStatistiques();
       this.jouerTour(ennemis, allies);
     } else {
       console.log(`${this.nom} ne fait rien ce tour-ci.`);

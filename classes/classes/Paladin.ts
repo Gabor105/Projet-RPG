@@ -2,7 +2,6 @@
 import { Aventurier } from "../Aventurier.ts";
 import { Character } from "../Character.ts";
 import { Ecrire } from "../../Ecrire.ts";
-import { GameManager } from "../gestion-du-jeu/GameManager.ts";
 import { Choix } from "../utils/Choix.ts";
 import données from '../données.json' with { type: 'json' };
 
@@ -55,7 +54,7 @@ export class Paladin extends Aventurier {
         await this.regarderInvantaire();
         break;
       case 4 :
-        GameManager.instance.afficherLesStatistiques();
+        this.afficherLesStatistiques();
         this.jouerTour(ennemis, allies);
         break;
       case 5 :

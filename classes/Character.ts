@@ -1,5 +1,6 @@
 // Personnage.ts
 import { Ecrire } from "../Ecrire.ts";
+import { GameManager } from "./gestion-du-jeu/GameManager.ts"
 
 export class Character {
   nom: string;
@@ -138,5 +139,9 @@ export class Character {
 
   lirePMActuel(): number {
     return this.pmActuels;
+  }
+
+  protected afficherLesStatistiques(){
+    GameManager.instance.afficherLesStatistiques();
   }
 }

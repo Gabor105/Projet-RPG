@@ -1,6 +1,4 @@
-// import { randomInt } from "node:crypto";
 import { Aventurier } from "../Aventurier.ts";
-// import { Menu } from "./Menu.ts";
 import { Ecrire } from "../../Ecrire.ts";
 import { Character } from "../Character.ts";
 import { CalculeProbabilitées } from "../utils/CalculeProbabilitées.ts";
@@ -10,7 +8,6 @@ import { MorceauEtoile } from "../Objets/MorceauEtoile.ts";
 import { DemiEtoile } from "../Objets/DemiEtoile.ts";
 import { Objet } from "../Objets/Objet.ts";
 import { Potion } from "../Objets/Potion.ts";
-import { GameManager } from "../gestion-du-jeu/GameManager.ts"
 import { Choix } from "../utils/Choix.ts";
 import données from '../données.json' with { type: 'json' };
 
@@ -64,7 +61,7 @@ export class Voleur extends Aventurier {
                 await this.regarderInvantaire();
                 break;
             case 4 :
-                GameManager.instance.afficherLesStatistiques();
+                this.afficherLesStatistiques();
                 await this.jouerTour(ennemis, allies);
                 break;
             case 5:
