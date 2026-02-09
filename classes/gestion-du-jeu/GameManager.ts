@@ -36,44 +36,59 @@ export class GameManager {
     }
 
     let valeurCombat = true;
-
+    const tempsDeLecture = 600;
     const ecrire = new Ecrire();
-    ecrire.ecrireUnePhrase("Aujourd’hui, comme à leur habitude, le trio d’aventuriers tient son stand d’aide dans la forêt. Leur objectif est de venir bénévolement aider quiconque aurait besoin d’aide dans la forêt.");
-    ecrire.ecrireUnePhrase("Soudain, un gentil petit monstre s’approche d’eux et leur dit :");
-    ecrire.ecrireUnePhrase("— J’ai besoin de votre aide ! Le méchant dragon a capturé mon ami parce qu’il cultivait des carottes ! Il faut que vous le libériez ! dit le gentil monstre.");
-    ecrire.ecrireUnePhrase("Ce dragon est le chef du service de protection de la forêt, ce qui lui octroie le droit de créer des règles comme il le désire. Heureusement pour notre groupe d’aventuriers, il y a une solution assez simple pour libérer les prisonniers victimes des lois que le dragon instaure. Il faut parcourir les cinq salles du donjon réalisé par le dragon et vaincre le dragon ; en échange de quoi, le dragon libérera le prisonnier et créera une nouvelle loi proposée par le vainqueur du donjon, si celle-ci est possible.");
-    ecrire.ecrireUnePhrase("Les aventuriers acceptèrent alors la requête de ce petit monstre et rentrèrent dans le donjon.");
+    ecrire.ecrireUnePhrase("\nAujourd’hui, comme à leur habitude, le trio d’aventuriers tient son stand d’aide dans la forêt. Leur objectif est de venir bénévolement aider quiconque aurait besoin d’aide dans la forêt.\n");
+    await sleep(tempsDeLecture);
+    ecrire.ecrireUnePhrase("Soudain, un gentil petit monstre s’approche d’eux et leur dit :\n");
+    await sleep(tempsDeLecture);
+    ecrire.ecrireUnePhrase("— J’ai besoin de votre aide ! Le méchant dragon a capturé mon ami parce qu’il cultivait des carottes ! Il faut que vous le libériez ! dit le gentil monstre.\n");
+    await sleep(tempsDeLecture);
+    ecrire.ecrireUnePhrase("Ce dragon est le chef du service de protection de la forêt, ce qui lui octroie le droit de créer des règles comme il le désire. Heureusement pour notre groupe d’aventuriers, il y a une solution assez simple pour libérer les prisonniers victimes des lois que le dragon instaure. Il faut parcourir les cinq salles du donjon réalisé par le dragon et vaincre le dragon ; en échange de quoi, le dragon libérera le prisonnier et créera une nouvelle loi proposée par le vainqueur du donjon, si celle-ci est possible.\n");
+    await sleep(tempsDeLecture);
+    ecrire.ecrireUnePhrase("Les aventuriers acceptèrent alors la requête de ce petit monstre et rentrèrent dans le donjon.\n");
 
-
-    // déroulement de la partie :
-    //1.	Une salle avec un combat aléatoire ( 3 monstres) 🦹‍♀️🧟🧜‍♂️
+    ecrire.ecrireUnePhrase("\n== SALLE 1 - combat de monstre 🦹‍♀️🧟🧜‍♂️ ==\n")
     const fight1 : Fight = new Fight(false);
     valeurCombat = await fight1.lancer();
     if (!valeurCombat) return;
-    //2.	Une salle avec un coffre 🧰, pouvant être un piège qui blesse le personnage l'ouvrant, ou deux objets aléatoires
+
+    ecrire.ecrireUnePhrase("\n== SALLE 2 - coffre 🧰 ==\n")
     const coffre1 : SalleCoffre = new SalleCoffre();
     await coffre1.ouvrirCoffre();
-    //3.	Une seconde salle avec un combat aléatoire (3 monstres) 🦹‍♀️🧟🧜‍♂️
+    
+    ecrire.ecrireUnePhrase("\n== SALLE 3 - combat de monstre 🦹‍♀️🧟🧜‍♂️ ==\n")
     const fight2 : Fight = new Fight(false);
     valeurCombat = await fight2.lancer();
     if (!valeurCombat) return;
-    //4.	Une seconde salle avec un coffre (idem) 🧰
+
+    ecrire.ecrireUnePhrase("\n== SALLE 4 - coffre 🧰 ==\n")
     const coffre2 : SalleCoffre = new SalleCoffre();
     await coffre2.ouvrirCoffre();
-    //5.	Une salle avec un Boss (monstre unique) 🧛
+
+    ecrire.ecrireUnePhrase("\n== SALLE 5 - combat de boss 🐉 ==\n")
+    ecrire.ecrireUnePhrase("\n- Je vois que vous avez réussi à arriver jusqu’à moi ! Mais cela ne signifie pas que vous allez me vaincre ! Dit le dragon.\n")
     const fight3 : Fight = new Fight(true);
     valeurCombat = await fight3.lancer();
     if (!valeurCombat) return;
 
-    ecrire.ecrireUnePhrase("— Bravo !! dit le dragon. Puisque vous avez gagné, je vais libérer votre ami. Quelle loi voulez-vous ajouter à notre belle forêt ?");
-    ecrire.ecrireUnePhrase("— Nous voulons que vous réautorisiez la culture de carottes ! dirent alors en chœur les aventuriers.");
-    ecrire.ecrireUnePhrase("— Ahhh… Je ne sais pas si c’est une bonne idée. En fait, si j’ai interdit cette culture, c'est parce qu’un de mes amis a récemment mangé une carotte que l’on lui avait donnée et qu’il a été malade durant plusieurs jours après cela… Je ne veux pas que cela puisse arriver à quelqu’un d’autre, explique le dragon.");
-    ecrire.ecrireUnePhrase("— Vous êtes sûr que c’était vraiment une carotte ? demande le cultivateur de carottes.");
-    ecrire.ecrireUnePhrase("— Je n’avais jamais vu de carotte avant ce jour-là, donc je ne sais pas. Mais c’est vrai que vos carottes ne ressemblent pas à celle qu’il avait mangée… De plus, il l’avait récupérée dans l’eau… Ah… C’était sûrement un poisson et non une carotte ! dit le dragon.");
-    ecrire.ecrireUnePhrase("— Si vous le souhaitez, je suis un expert dans la réalisation de gâteaux à la carotte ! Vous voulez en goûter ? demande l’ex-prisonnier.");
-    ecrire.ecrireUnePhrase("— Oui, je veux bien, merci, dit le dragon.");
-    ecrire.ecrireUnePhrase("Tout le monde se mit alors à goûter le gâteau à la carotte. Il était si bon que le dragon s’exclama et dit :");
-    ecrire.ecrireUnePhrase("— Quel délicieux gâteau ! Comment ai-je pu rater cela toute ma vie ? J’annonce qu’à partir d’aujourd’hui, non seulement la culture de carottes sera autorisée, mais en plus, cette journée sera la fête de la carotte pour ne plus jamais oublier que la carotte, c’est super bon !");
+    ecrire.ecrireUnePhrase("— Bravo !! dit le dragon. Puisque vous avez gagné, je vais libérer votre ami. Quelle loi voulez-vous ajouter à notre belle forêt ?\n");
+    await sleep(tempsDeLecture);
+    ecrire.ecrireUnePhrase("— Nous voulons que vous réautorisiez la culture de carottes ! dirent alors en chœur les aventuriers.\n");
+    await sleep(tempsDeLecture);
+    ecrire.ecrireUnePhrase("— Ahhh… Je ne sais pas si c’est une bonne idée. En fait, si j’ai interdit cette culture, c'est parce qu’un de mes amis a récemment mangé une carotte que l’on lui avait donnée et qu’il a été malade durant plusieurs jours après cela… Je ne veux pas que cela puisse arriver à quelqu’un d’autre, explique le dragon.\n");
+    await sleep(tempsDeLecture);
+    ecrire.ecrireUnePhrase("— Vous êtes sûr que c’était vraiment une carotte ? demande le cultivateur de carottes.\n");
+    await sleep(tempsDeLecture);
+    ecrire.ecrireUnePhrase("— Je n’avais jamais vu de carotte avant ce jour-là, donc je ne sais pas. Mais c’est vrai que vos carottes ne ressemblent pas à celle qu’il avait mangée… De plus, il l’avait récupérée dans l’eau… Ah… C’était sûrement un poisson et non une carotte ! dit le dragon.\n");
+    await sleep(tempsDeLecture);
+    ecrire.ecrireUnePhrase("— Si vous le souhaitez, je suis un expert dans la réalisation de gâteaux à la carotte ! Vous voulez en goûter ? demande l’ex-prisonnier.\n");
+    await sleep(tempsDeLecture);
+    ecrire.ecrireUnePhrase("— Oui, je veux bien, merci, dit le dragon.\n");
+    await sleep(tempsDeLecture);
+    ecrire.ecrireUnePhrase("Tout le monde se mit alors à goûter le gâteau à la carotte. Il était si bon que le dragon s’exclama et dit :\n");
+    await sleep(tempsDeLecture);
+    ecrire.ecrireUnePhrase("— Quel délicieux gâteau ! Comment ai-je pu rater cela toute ma vie ? J’annonce qu’à partir d’aujourd’hui, non seulement la culture de carottes sera autorisée, mais en plus, cette journée sera la fête de la carotte pour ne plus jamais oublier que la carotte, c’est super bon !\n");
   }
 
   private choisirGroupeAventuriers(): Aventurier[] {
@@ -137,3 +152,5 @@ export class GameManager {
     }
   }
 }
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

@@ -70,14 +70,14 @@ export class Fight {
           }
         }
 
-        if (this.equipeEstMorte(GameManager.instance.equipeA)) {
-          console.log("\nTous les aventuriers sont K.O. !");
+        if (this.equipeEstMorte(GameManager.instance.equipeB)) {
+          console.log("\nTous les monstres sont K.O. !");
           console.log("Victoire !");
           this.afficherEtatEquipes();
           return true;
         }
-        if (this.equipeEstMorte(GameManager.instance.equipeB)) {
-          console.log("\nTous les monstres sont K.O. !");
+        if (this.equipeEstMorte(GameManager.instance.equipeA)) {
+          console.log("\nTous les aventuriers sont K.O. !");
           console.log("Vous avez perdu... Rejouer pour tenter votre chance de nouveau !");
           this.afficherEtatEquipes();
           return false;
