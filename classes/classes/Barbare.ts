@@ -2,6 +2,7 @@
 import { Aventurier } from "../Aventurier.ts";
 import { Character } from "../Character.ts";
 import { Menu } from "../utils/Menu.ts";
+import { GameManager } from "../gestion-du-jeu/GameManager.ts";
 import données from '../données.json' with { type: 'json' };
 
 export class Barbare extends Aventurier {
@@ -62,6 +63,8 @@ export class Barbare extends Aventurier {
     const optionsActions = [
       { label: "Attaque physique", valeur: "ATTAQUE_PHYSIQUE" },
       { label: "Berserk (130%, cible aléatoire, -20% PV)", valeur: "BERSERK" },
+      { label: "Invantaire", valeur:"INVANTAIRE"},
+      { label: "Voir les statistiques des personnages", valeur:"STATISTIQUE"},
       { label: "Ne rien faire", valeur: "RIEN" },
     ];
 
@@ -94,6 +97,11 @@ export class Barbare extends Aventurier {
       this.attaqueBasique(cibleChoisie);
     } else if (actionChoisie === "BERSERK") {
       this.berserk(ennemis);
+    } else if (actionChoisie === "INVANTAIRE") { 
+      await this.regarderInvantaire();
+    } else if (actionChoisie === "STATISTIQUE") { 
+      GameManager.instance.afficherLesStatistiques();
+      this.jouerTour(ennemis, allies);
     } else {
       console.log(`${this.nom} ne fait rien ce tour-ci.`);
     }

@@ -102,8 +102,10 @@ export class Invantaire {
         const listeNomPersonnageAventurier : Aventurier[] = [];
         for (let i = 0; i < GameManager.instance.equipeA.length; i++) {
             if (onPrendLesPerdu || GameManager.instance.equipeA[i].pvActuels > 0){
-                listeNomPersonnage.push(GameManager.instance.equipeA[i].nom);
-                listeNomPersonnageAventurier.push(GameManager.instance.equipeA[i]);
+                if (listeNom[valeur] != "💊 Éther" || (listeNom[valeur] == "💊 Éther" && GameManager.instance.equipeA[i].pmMax > 0)){
+                    listeNomPersonnage.push(GameManager.instance.equipeA[i].nom);
+                    listeNomPersonnageAventurier.push(GameManager.instance.equipeA[i]);
+                }
             }         
         }
         const valeur2 = await choix.faireUnChoix(listeNomPersonnage)-1;

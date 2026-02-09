@@ -2,6 +2,7 @@
 import { Aventurier } from "../Aventurier.ts";
 import { Character} from "../Character.ts";
 import { Menu } from "../utils/Menu.ts";
+import { GameManager } from "../gestion-du-jeu/GameManager.ts";
 import données from '../données.json' with { type: 'json' };
 
 export class Mage extends Aventurier {
@@ -12,33 +13,14 @@ export class Mage extends Aventurier {
     this.coutSort = 10;
   }
 
-  // private attaqueMagique(cible: Character): void {
-  //   if (this.pmActuels < this.coutSort) {
-  //     console.log(`${this.nom} n'a pas assez de PM pour lancer un sort.`);
-  //     return;
-  //   }
-
-  //   this.pmActuels -= this.coutSort;
-
-  //   // Dégâts magiques : on ignore la défense
-  //   const degats = this.attaque * 2;
-  //   console.log(
-  //     `${this.nom} lance un sort sur ${cible.nom} et inflige ${degats} dégâts magiques !`,
-  //   );
-
-  //   // On applique directement les dégâts magiques
-  //   cible.pvActuels = Math.max(0, cible.pvActuels - degats);
-  //   console.log(
-  //     `${cible.nom} a maintenant ${cible.pvActuels}/${cible.pvMax} PV.`,
-  //   );
-  // }
-
   public override async jouerTour(ennemis: Character[], allies: Character[]): Promise<void> {
     if (!this.phraseTours()) return;
   
     const optionsActions = [
       { label: "Attaque physique", valeur: "ATTAQUE_PHYSIQUE" },
       { label: "Attaque magique (coût 10 PM)", valeur: "ATTAQUE_MAGIQUE" },
+      { label: "Invantaire", valeur:"INVANTAIRE"},
+      { label: "Voir les statistiques des personnages", valeur:"STATISTIQUE"},
       { label: "Ne rien faire", valeur: "RIEN" },
     ];
 
@@ -72,6 +54,11 @@ export class Mage extends Aventurier {
     } else if (actionChoisie === "ATTAQUE_MAGIQUE") {
       const cibleChoisie = menuCibles.poserQuestion();
       this.attaqueMagique(cibleChoisie);
+    } else if (actionChoisie === "INVANTAIRE") { 
+      await this.regarderInvantaire();
+    } else if (actionChoisie === "STATISTIQUE") { 
+      GameManager.instance.afficherLesStatistiques();
+      this.jouerTour(ennemis, allies);
     } else {
       console.log(`${this.nom} ne fait rien ce tour-ci.`);
     }
