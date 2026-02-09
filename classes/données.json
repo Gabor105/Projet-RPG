@@ -1,0 +1,106 @@
+{
+    "Paladin": {
+        "nom": "Paladin",
+        "pvMax": 120,
+        "attaque": 15,
+        "defense": 12,
+        "vitesse": 8,
+        "pmMax": 0
+    },
+    "Pretre": {
+        "nom": "Pretre",
+        "pvMax": 80,
+        "attaque": 10,
+        "defense": 5,
+        "vitesse": 9,
+        "pmMax": 0
+    },
+    "Voleur": {
+        "nom": "Voleur",
+        "pvMax": 90,
+        "attaque": 16,
+        "defense": 7,
+        "vitesse": 18,
+        "pmMax": 0
+    },
+    "Barbare": {
+        "nom": "Barbare",
+        "pvMax": 140,
+        "attaque": 25,
+        "defense": 4,
+        "vitesse": 10,
+        "pmMax": 0
+    },
+    "Guerrier": {
+        "nom": "Guerrier",
+        "pvMax": 110,
+        "attaque": 20,
+        "defense": 10,
+        "vitesse": 8,
+        "pmMax": 0
+    },
+    "Mage": {
+        "nom": "Mage",
+        "pvMax": 75,
+        "attaque": 6,
+        "defense": 3,
+        "vitesse": 11,
+        "pmMax": 60
+    },
+    "Orc": {
+        "nom": "Orc",
+        "pvMax": 70,
+        "attaque": 16,
+        "defense": 5,
+        "vitesse": 7,
+        "pmMax": 2
+    },
+    "Gobelin": {
+        "nom": "Gobelin",
+        "pvMax": 50,
+        "attaque": 12,
+        "defense": 2,
+        "vitesse": 13,
+        "pmMax": 0
+    },
+    "Troll": {
+        "nom": "Troll",
+        "pvMax": 100,
+        "attaque": 20,
+        "defense": 8,
+        "vitesse": 5,
+        "pmMax": 0
+    },
+    "Liche": {
+        "nom": "Liche",
+        "pvMax": 70,
+        "attaque": 12,
+        "defense": 4,
+        "vitesse": 9,
+        "pmMax": 16
+    },
+    "Golem_de_Pierre": {
+        "nom": "Golem de Pierre",
+        "pvMax": 150,
+        "attaque": 15,
+        "defense": 20,
+        "vitesse": 2,
+        "pmMax": 0
+    },
+    "Spectre": {
+        "nom": "Spectre",
+        "pvMax": 40,
+        "attaque": 18,
+        "defense": 12,
+        "vitesse": 15,
+        "pmMax": 12
+    },
+    "Boss": {
+        "nom": "Boss",
+        "pvMax": 200,
+        "attaque": 40,
+        "defense": 30,
+        "vitesse": 60,
+        "pmMax": 0
+    }
+}
