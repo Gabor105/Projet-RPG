@@ -1,7 +1,6 @@
 // Paladin.ts
 import { Aventurier } from "../Aventurier.ts";
 import { Character } from "../Character.ts";
-import { Menu } from "../utils/Menu.ts";
 import { Ecrire } from "../../Ecrire.ts";
 import { GameManager } from "../gestion-du-jeu/GameManager.ts";
 import { Choix } from "../utils/Choix.ts";

@@ -1,5 +1,4 @@
 import { Character } from "../Character.ts";
-import { Invantaire } from "../Invantaire.ts";
 
 export class Objet{
     utiliserObjet(character:Character){

@@ -37,7 +37,7 @@ export class Fight {
     return equipe.every((perso) => !perso.estVivant());
   }
 
-  async lancer() {
+  async lancer():Promise<boolean> {
     this.ecrire.ecrireUnePhrase(">>> Début du combat !");
     this.afficherEtatEquipes();
 
@@ -71,22 +71,23 @@ export class Fight {
         }
 
         if (this.equipeEstMorte(GameManager.instance.equipeA)) {
-          console.log("\nTous les membres de l'équipe A sont K.O. !");
-          console.log("Victoire de l'équipe B !");
+          console.log("\nTous les aventuriers sont K.O. !");
+          console.log("Victoire !");
           this.afficherEtatEquipes();
-          return;
+          return true;
         }
         if (this.equipeEstMorte(GameManager.instance.equipeB)) {
-          console.log("\nTous les membres de l'équipe B sont K.O. !");
-          console.log("Victoire de l'équipe A !");
+          console.log("\nTous les monstres sont K.O. !");
+          console.log("Vous avez perdu... Rejouer pour tenter votre chance de nouveau !");
           this.afficherEtatEquipes();
-          return;
+          return false;
         }
       }
 
       this.afficherEtatEquipes();
       this.numeroTour++;
     }
+    return false;
   }
 }
 
