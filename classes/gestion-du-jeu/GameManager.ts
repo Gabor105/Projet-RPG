@@ -48,6 +48,7 @@ export class GameManager {
     await sleep(tempsDeLecture);
     ecrire.ecrireUnePhrase("Les aventuriers acceptèrent alors la requête de ce petit monstre et rentrèrent dans le donjon.\n");
 
+    prompt("\n Appuyer pour continuer...\n");
     ecrire.ecrireUnePhrase("\n== SALLE 1 - combat de monstre 🦹‍♀️🧟🧜‍♂️ ==\n")
     const fight1 : Fight = new Fight(false);
     valeurCombat = await fight1.lancer();
